@@ -1,0 +1,13 @@
+{
+  "name": "ckcmclinic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --proxy \"localhost/CKCMClinic\" --files \"*.php, *.css, *.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
