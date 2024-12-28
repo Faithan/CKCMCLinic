@@ -32,4 +32,25 @@ To get started, follow these steps:
 First, clone the project to your local machine:
 
 ```bash
-git clone https://github.com//CKCMClinic.git
+git clone https://github.com/Faithan/CKCMCLinic.git
+
+
+
+CKCMClinic/
+  ├── index.php               # Home page
+  ├── css/                    # Stylesheets
+  │   └── style.css
+  ├── js/                     # JavaScript files
+  │   └── script.js
+  ├── templates/              # PHP templates for layout
+  │   └── header.php
+  ├── config/                 # Configuration files
+  │   └── db.php              # Database connection
+  ├── reports/                # Report generation scripts
+  │   └── request-report.php
+  └── README.md               # Project documentation (this file)
+
+
+
+# MESSAGE for me(progammer)
+ To run the Live Server Make to install nodejs.org and npm to check write this in command promt: node -v and npm -v
