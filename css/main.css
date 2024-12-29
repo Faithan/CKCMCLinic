@@ -1,6 +1,13 @@
 :root {
+    font-size: 62.5%;
+    /* 10px on default */
+
+    --text-color:#0F172A;
+    --text-color2: #606060;
+
 
     --color1: #EB5704;  /* dominant color */
+    --color1b: #eb5904ba;
     --color2: #EBB009;
     --color3: #0F172A;
     --color4: #F8FAFC;

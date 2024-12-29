@@ -5,7 +5,7 @@
   "main": "index.php",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start --proxy \"localhost/CKCMClinic\" --files \"*.php, *.css, *.js\""
+    "start": "browser-sync start --proxy \"localhost/CKCMClinic\" --files \"**/*.php, **/*.css, **/*.js\""
   },
   "keywords": [],
   "author": "",
