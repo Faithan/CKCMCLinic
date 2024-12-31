@@ -89,7 +89,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .mini-menu a.active {
         background-color: #0F172A;
         color: var(--color4);
-        font-weight: bold;
         border-radius: 5px;
     }
 
@@ -97,7 +96,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     /* Sidebar Styling */
     .sidebar {
         width: 280px;
-        height: 100vh;
+    
         background-color: #1E293B;
         top: 0;
         left: 0;
