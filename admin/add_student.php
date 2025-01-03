@@ -43,10 +43,16 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 <div class="input-base-container">
                     <strong for="">Student Information:</strong>
                     <div class="input-mini-container">
+
                         <div class="input-container">
-                            <label for="">Student ID:</label>
+                            <label for="student_id">Student ID:</label>
                             <input type="text" id="student_id" name="student_id" required>
+                            <p id="student-id-message"></p> <!-- Message will appear here -->
                         </div>
+                      
+
+
+
                         <div class="input-container">
                             <label for="">First Name:</label>
                             <input type="text" name="first_name">
@@ -127,7 +133,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                                     if ($dept_result && $dept_result->num_rows > 0) {
                                         while ($row = $dept_result->fetch_assoc()) {
-                                            echo '<option value="' . htmlspecialchars($row['course_id']) . '">' . htmlspecialchars($row['course_name']) . '</option>';
+                                            echo '<option value="' . htmlspecialchars($row['course_name']) . '">' . htmlspecialchars($row['course_name']) . '</option>';
                                         }
                                     } else {
                                         echo '<option value="">No Departments Available</option>';
@@ -156,7 +162,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                                     if ($year_lvl_result && $year_lvl_result->num_rows > 0) {
                                         while ($row = $year_lvl_result->fetch_assoc()) {
-                                            echo '<option value="' . htmlspecialchars($row['year_lvl_id']) . '">' . htmlspecialchars($row['year_lvl_name']) . '</option>';
+                                            echo '<option value="' . htmlspecialchars($row['year_lvl_name']) . '">' . htmlspecialchars($row['year_lvl_name']) . '</option>';
                                         }
                                     } else {
                                         echo '<option value="">No Year Levels Available</option>';
@@ -193,8 +199,37 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                     </div>
 
+                    <strong>Vital Signs:</strong>
+                    <div class="input-mini-container">
+                        <div class="input-container">
+                            <label for="">Blood Pressure:</label>
+                            <input type="text" name="blood_pressure">
+                        </div>
+                        <div class="input-container">
+                            <label for="">Temperature:</label>
+                            <input type="number" name="temperature">
+                        </div>
+                        <div class="input-container">
+                            <label for="">Pulse Rate:</label>
+                            <input type="text" name="pulse_rate">
+                        </div>
+                        <div class="input-container">
+                            <label for="">Respiratory Rate:</label>
+                            <input type="text" name="respiratory_rate">
+                        </div>
+                        <div class="input-container">
+                            <label for="">Height:</label>
+                            <input type="text" name="height">
+                        </div>
+                        <div class="input-container">
+                            <label for="">Weight:</label>
+                            <input type="text" name="weight">
+                        </div>
+                    </div>
 
-                    <strong>Emergency Contact Information:</strong>
+
+
+                    <strong>Emergency Contact Information (atleast 1 is required):</strong>
                     <div class="input-mini-container">
                         <div class="input-container">
                             <label for="">Name (Person1):</label>
@@ -223,6 +258,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                             <input type="text" name="eperson2_relationship">
                         </div>
                     </div>
+
+
+
+
+
                 </div>
 
                 <div class="image-container">
@@ -235,7 +275,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                 <div class="button-container">
                     <a href="students.php">Return</a>
-                    <button type="submit" id="save-student">Save</button>
+                    <button type="submit" id="save-student" >Save</button>
                 </div>
             </form>
         </main>
@@ -249,84 +289,16 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 
 
-<!-- scripts -->
-<script>
-    $(document).ready(function() {
-        $('#add-student-form').on('submit', function(event) {
-            event.preventDefault(); // Prevent form submission initially
 
-            var studentId = $('#student_id').val(); // Get student ID input value
 
-            // Check if the student ID already exists in the database
-            $.ajax({
-                url: 'check_student_id.php', // PHP script to check if the student ID exists
-                method: 'POST',
-                data: {
-                    student_id: studentId
-                },
-                success: function(response) {
-                    if (response === 'exists') {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Student ID is already taken!',
-                        });
-                    } else {
-                        // If student ID is available, show confirmation dialog
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "Do you want to save this student?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonText: 'Yes, save it!',
-                            cancelButtonText: 'No, cancel!',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // If confirmed, submit the form
-                                $.ajax({
-                                    url: 'save_student.php', // Your script to save student
-                                    method: 'POST',
-                                    data: $('#add-student-form').serialize(), // Serialize form data
-                                    success: function(saveResponse) {
-                                        if (saveResponse.trim() === 'success') {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Saved!',
-                                                text: 'Student has been added.',
-                                            }).then(() => {
-                                                window.location.href = 'students.php'; // Redirect after success
-                                            });
-                                        } else {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Error!',
-                                                text: 'There was an issue saving the student.',
-                                            });
-                                        }
-                                    },
-                                    error: function() {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error!',
-                                            text: 'Something went wrong while saving the student.',
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Something went wrong while checking student ID.',
-                    });
-                }
-            });
-        });
-    });
-</script>
+
+
+
+
+
+
+
+
 
 
 
@@ -458,6 +430,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         gap: 10px;
         overflow-y: scroll;
         height: 200px;
+    }
+
+    .input-base-container strong {
+        font-size: 1.3rem;
+        margin-top: 10px;
     }
 
 

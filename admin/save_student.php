@@ -1,6 +1,3 @@
-
-
-
 <?php
 require '../config/db_connect.php';
 session_start();
@@ -11,8 +8,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Form data collection
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
     $student_id = $_POST['student_id'];
     $password = $_POST['password'];
     $first_name = $_POST['first_name'];
@@ -30,98 +28,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $additional_info = $_POST['additional_info'];
     $department = $_POST['department'];
     $year_level = $_POST['year_level'];
+    // Get current date and time
+    $datetime_recorded = date('Y-m-d H:i:s');
 
 
-    // Emergency contact details
+    $blood_pressure = $_POST['blood_pressure'];
+    $temperature = $_POST['temperature'];
+    $pulse_rate = $_POST['pulse_rate'];
+    $respiratory_rate = $_POST['respiratory_rate'];
+    $height = $_POST['height'];
+    $weight = $_POST['weight'];
+
+    // Emergency contact information
     $eperson1_name = $_POST['eperson1_name'];
     $eperson1_phone = $_POST['eperson1_phone'];
     $eperson1_relationship = $_POST['eperson1_relationship'];
     $eperson2_name = $_POST['eperson2_name'];
     $eperson2_phone = $_POST['eperson2_phone'];
     $eperson2_relationship = $_POST['eperson2_relationship'];
-    $datetime_recorded = date('Y-m-d H:i:s'); // Current timestamp
 
-    // Check if student_id already exists
-    $check_query = "SELECT * FROM student_tbl WHERE student_id = ?";
-    $stmt = $conn->prepare($check_query);
-    $stmt->bind_param('s', $student_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        echo 'Student ID already exists!';
-    } else {
-        // Handle file upload
+    // Image upload
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
         $profile_picture = $_FILES['profile_picture'];
-        if ($profile_picture['error'] === UPLOAD_ERR_OK) {  // Check if file upload is successful
-            $upload_dir = '../student_pic/';
-            $file_name = uniqid() . '_' . basename($profile_picture['name']);
-            $upload_file = $upload_dir . $file_name;
+        $profile_picture_name = time() . "_" . $profile_picture['name'];
+        $profile_picture_tmp_name = $profile_picture['tmp_name'];
+        $profile_picture_path = '../student_pic/' . $profile_picture_name;
+        move_uploaded_file($profile_picture_tmp_name, $profile_picture_path);
+    } else {
+        $profile_picture_name = null; // No image uploaded
+    }
 
-            if (move_uploaded_file($profile_picture['tmp_name'], $upload_file)) {
-                // Insert student data into the database
-                $stmt = $conn->prepare("INSERT INTO student_tbl 
-                    (student_id, password, first_name, middle_name, last_name, extension, email, gender, birthdate, age, birth_place, marital_status, address, religion, additional_info, department, year_level, profile_picture, eperson1_name, eperson1_phone, eperson1_relationship, eperson2_name, eperson2_phone, eperson2_relationship, datetime_recorded) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    // Insert the data into the database
+    try {
 
-                // Bind parameters
-                $stmt->bind_param(
-                    'sssssssssssssssssssssssss',  // 24 placeholders for 24 values
-                    $student_id,
-                    $password,
-                    $first_name,
-                    $middle_name,
-                    $last_name,
-                    $extension,
-                    $email,
-                    $gender,
-                    $birthdate,
-                    $age,
-                    $birth_place,
-                    $marital_status,
-                    $address,
-                    $religion,
-                    $additional_info,
-                    $department,
-                    $year_level,
-                    $file_name,  // Bind profile_picture here
-                    $eperson1_name,
-                    $eperson1_phone,
-                    $eperson1_relationship,
-                    $eperson2_name,
-                    $eperson2_phone,
-                    $eperson2_relationship,
-                    $datetime_recorded
-                );
-
-                if ($stmt->execute()) {
-                    // Success
-                    echo '<script>
-                        Swal.fire({
-                            icon: "success",
-                            title: "Student Saved!",
-                            text: "The student record has been successfully saved."
-                        }).then(() => {
-                            window.location.href = "students.php"; // Redirect to student list page
-                        });
-                    </script>';
-                } else {
-                    // Error
-                    echo '<script>
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error!",
-                            text: "There was an error saving the student data."
-                        });
-                    </script>';
-                }
-
-                $stmt->close();
-            } else {
-                echo 'Failed to upload profile picture.';
-            }
+        $stmt = $conn->prepare("INSERT INTO `student_tbl`(`student_id`, `password`, `first_name`, `middle_name`, `last_name`, `extension`, `email`, `gender`, `birthdate`, `age`, `birth_place`, `marital_status`, `address`, `religion`, `additional_info`, `department`, `year_level`, `profile_picture`, `blood_pressure`, `temperature`, `pulse_rate`, `respiratory_rate`, `height`, `weight`, `eperson1_name`, `eperson1_phone`, `eperson1_relationship`, `eperson2_name`, `eperson2_phone`, `eperson2_relationship`, `datetime_recorded`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+        
+        // Bind the parameters
+        $stmt->bind_param("sssssssssssssssssssssssssssssss", $student_id, $password, $first_name, $middle_name, $last_name, $extension, $email, $gender, $birthdate, $age, $birth_place, $marital_status, $address, $religion, $additional_info, $department, $year_level, $profile_picture_name, $blood_pressure, $temperature, $pulse_rate, $respiratory_rate, $height, $weight, $eperson1_name, $eperson1_phone, $eperson1_relationship, $eperson2_name, $eperson2_phone, $eperson2_relationship, $datetime_recorded);
+        
+        if ($stmt->execute()) {
+            // Redirect to the students page or show success message
+            header("Location: students.php?status=success");
+            exit();
         } else {
-            echo 'Profile picture upload error: ' . $profile_picture['error'];
+            // Error executing query
+            throw new Exception("Error saving student record.");
         }
+    } catch (Exception $e) {
+        // Handle any errors
+        echo "Error: " . $e->getMessage();
     }
 }
