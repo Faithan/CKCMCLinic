@@ -1,4 +1,12 @@
 <?php
+// Check for error in the URL
+$error = isset($_GET['error']) ? $_GET['error'] : '';
+
+?>
+
+
+
+<?php
 require '../config/db_connect.php';
 session_start();
 
@@ -46,32 +54,31 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                         <div class="input-container">
                             <label for="student_id">Student ID:</label>
-                            <input type="text" id="student_id" name="student_id" required>
-                            <p id="student-id-message"></p> <!-- Message will appear here -->
+                            <input type="number" id="student_id" name="student_id" required>
                         </div>
-                      
+
 
 
 
                         <div class="input-container">
                             <label for="">First Name:</label>
-                            <input type="text" name="first_name">
+                            <input type="text" name="first_name" required>
                         </div>
                         <div class="input-container">
                             <label for="">Middle Name:</label>
-                            <input type="text" name="middle_name">
+                            <input type="text" name="middle_name" required>
                         </div>
                         <div class="input-container">
                             <label for="">Last Name:</label>
-                            <input type="text" name="last_name">
+                            <input type="text" name="last_name" required>
                         </div>
                         <div class="input-container">
-                            <label for="">Extension e.g. Jr./Sr.:</label>
+                            <label for="">Extension e.g. Jr./Sr. <em>(if applicable)</em>:</label>
                             <input type="text" name="extension">
                         </div>
                         <div class="input-container">
                             <label for="">Email:</label>
-                            <input type="text" name="email">
+                            <input type="text" name="email" required>
                         </div>
                         <div class="input-container">
                             <label for="">Gender:</label>
@@ -83,8 +90,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         </div>
 
                         <div class="input-container">
-                            <label for="">Date of Birth:</label>
-                            <input type="date" name="birthdate">
+                            <label for="birthdate">Date of Birth:</label>
+                            <input type="date" name="birthdate" required max="<?= date('Y-m-d'); ?>">
                         </div>
 
                         <div class="input-container">
@@ -94,23 +101,23 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
                         <div class="input-container">
                             <label for="">Birth Place:</label>
-                            <input type="text" name="birth_place">
+                            <input type="text" name="birth_place" required>
                         </div>
 
                         <div class="input-container">
                             <label for="">Marital Status:</label>
-                            <input type="text" name="marital_status">
+                            <input type="text" name="marital_status" required>
                         </div>
 
 
                         <div class="input-container">
                             <label for="">Address:</label>
-                            <input type="text" name="address">
+                            <input type="text" name="address" required>
                         </div>
 
                         <div class="input-container">
                             <label for="">Religion:</label>
-                            <input type="text" name="religion">
+                            <input type="text" name="religion" required>
                         </div>
 
 
@@ -233,15 +240,15 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                     <div class="input-mini-container">
                         <div class="input-container">
                             <label for="">Name (Person1):</label>
-                            <input type="text" name="eperson1_name">
+                            <input type="text" name="eperson1_name" required>
                         </div>
                         <div class="input-container">
                             <label for="">Phone:</label>
-                            <input type="number" name="eperson1_phone">
+                            <input type="number" name="eperson1_phone" required>
                         </div>
                         <div class="input-container">
                             <label for="">Relationship:</label>
-                            <input type="text" name="eperson1_relationship">
+                            <input type="text" name="eperson1_relationship" required>
                         </div>
                     </div>
                     <div class="input-mini-container">
@@ -266,7 +273,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 </div>
 
                 <div class="image-container">
-                    <label for="">Upload Image:</label>
+                    <strong>Upload Image:</strong>
                     <div class="image-preview">
 
                     </div>
@@ -274,8 +281,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 </div>
 
                 <div class="button-container">
-                    <a href="students.php">Return</a>
-                    <button type="submit" id="save-student" >Save</button>
+                    <a href="students.php"><i class="fa-solid fa-share fa-flip-horizontal"></i> Return</a>
+                    <button type="submit" id="save-student"><i class="fa-solid fa-download"></i> Save</button>
                 </div>
             </form>
         </main>
@@ -286,7 +293,18 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 </html>
 
 
-
+<script>
+    // Check for error and display SweetAlert
+    const error = "<?php echo $error; ?>";
+    if (error === "student_id_exists") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Duplicate Student ID',
+            text: 'The Student ID is already taken. Please use a different one.',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>
 
 
 
@@ -493,6 +511,33 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+    }
+
+    .button-container a {
+        text-decoration: none;
+        font-size: 1.3rem;
+    }
+    .button-container a:hover {
+        color: var(--color1);
+        transform: translateY(-2px);
+        transition: ease-in-out 0.3s;
+      
+    }
+
+    .button-container button {
+        padding: 5px 15px;
+        font-size: 1.3rem;
+        color: var(--color4);
+        background-color: var(--color3b);
+        border-radius: 5px;
+    }
+
+    .button-container button:hover {
+        background-color: var(--color3);
+        transform: translateY(-2px);
+        transition: ease-in-out 0.3s;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
     }
 
     /* @media (max-width: 1200px) {
