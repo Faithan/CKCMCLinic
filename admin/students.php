@@ -92,7 +92,7 @@ $result = $conn->query($sql);
                                 <p><strong>Department:</strong> {$row['department']}</p>
                                 <p><strong>Year Level:</strong> {$row['year_level']}</p>
                                 <p><strong>Email:</strong> {$row['email']}</p>
-                                <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'>View Details</a>
+                                <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
                             </div>
                         </div>";
                     }
@@ -190,7 +190,7 @@ $result = $conn->query($sql);
     .search-container select {
         padding: 5px;
         background-color: #E7E9EB;
-        border: 1px solid ;
+        border: 1px solid;
         color: var(--text-color2);
     }
 
@@ -251,7 +251,7 @@ $result = $conn->query($sql);
         background-color: var(--color4);
         border: 1px solid var(--border-color);
         border-radius: 10px;
-        width: 300px;
+        width: 250px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
@@ -278,7 +278,7 @@ $result = $conn->query($sql);
     /* Card Content Section */
     .card-content {
         padding: 15px;
-        text-align: center;
+        text-align: start;
     }
 
     .card-content h3 {
@@ -289,8 +289,9 @@ $result = $conn->query($sql);
 
     .card-content p {
         margin: 5px 0;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
+        font-size: .9rem;
+        color: var(--text-color2);
+    
     }
 
     .card-content .action-btn {
@@ -298,7 +299,7 @@ $result = $conn->query($sql);
         margin-top: 10px;
         padding: 10px 15px;
         background-color: var(--color1);
-        color: var(--text-light);
+        color: var(--color4);
         border-radius: 5px;
         text-decoration: none;
         font-weight: bold;
@@ -306,7 +307,7 @@ $result = $conn->query($sql);
     }
 
     .card-content .action-btn:hover {
-        background-color: var(--hover-color);
+        background-color: var(--color1b);
         transform: translateY(-2px);
     }
 </style>
