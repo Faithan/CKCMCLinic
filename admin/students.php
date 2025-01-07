@@ -92,8 +92,11 @@ $result = $conn->query($sql);
                                 <p><strong>Department:</strong> {$row['department']}</p>
                                 <p><strong>Year Level:</strong> {$row['year_level']}</p>
                                 <p><strong>Email:</strong> {$row['email']}</p>
-                                <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
-                            </div>
+                                <div class='button-container'>
+                                <a href='update_records.php?student_id={$row['student_id']}' class='update-btn'><i class='fa-solid fa-notes-medical'></i> Update Record</a>
+                                 <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
+                                </div>
+                                 </div>
                         </div>";
                     }
                 } else {
@@ -291,14 +294,18 @@ $result = $conn->query($sql);
         margin: 5px 0;
         font-size: .9rem;
         color: var(--text-color2);
-    
+
     }
 
-    .card-content .action-btn {
+    .button-container{
+        display: flex;
+        gap: 5px;
+    }
+
+    .button-container a{
         display: inline-block;
         margin-top: 10px;
-        padding: 10px 15px;
-        background-color: var(--color1);
+        padding:10px;
         color: var(--color4);
         border-radius: 5px;
         text-decoration: none;
@@ -306,7 +313,23 @@ $result = $conn->query($sql);
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    .card-content .action-btn:hover {
+  
+
+    .update-btn{
+        background-color: var(--color3);
+    }
+
+    .update-btn:hover{
+        background-color: var(--text-hover);
+        transform: translateY(-2px);
+    }
+
+    .action-btn {
+        background-color: var(--color1);
+      
+    }
+
+     .action-btn:hover {
         background-color: var(--color1b);
         transform: translateY(-2px);
     }

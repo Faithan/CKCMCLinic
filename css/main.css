@@ -9,16 +9,16 @@
 
     --background-color: #E7E9EB;
     --border-color: #CCCCCC;
-    
+
 
     --color1: #EB5704;
     /* dominant color */
     --color1b: #eb5904ba;
     --color2: #EBB009;
     --color3: #0F172A;
-    --color3b:#1E293B;
+    --color3b: #1E293B;
     --color4: #F8FAFC;
-
+    --color5: rgb(0, 0, 170);
 
 }
 
@@ -27,7 +27,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}   
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -39,9 +39,16 @@ body {
     background-size: cover;
  */
 
-    
+
 }
 
-button{
+button {
     cursor: pointer;
+}
+
+.gradient-text {
+    background-image: linear-gradient(to right, #EB5704, #f7971e, #EB5704);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }

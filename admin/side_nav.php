@@ -68,7 +68,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 
 
-  
+
 </div>
 
 
@@ -86,6 +86,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 
 <style>
+
     .mini-menu a.active {
         background-color: #0F172A;
         color: var(--color4);
@@ -96,7 +97,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     /* Sidebar Styling */
     .sidebar {
         width: 280px;
-    
+
         background-color: #1E293B;
         top: 0;
         left: 0;
@@ -155,7 +156,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .mini-menu label {
         font-size: 1.1rem;
         color: #ddd;
-     
+
         text-transform: uppercase;
         margin-bottom: 10px;
     }
@@ -184,7 +185,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .logout-btn {
         text-decoration: none;
         font-size: 1.4rem;
-   
+
         color: #d0d0d0;
         padding: 10px;
     }
@@ -199,6 +200,4 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .logout-btn i {
         margin-right: 5px;
     }
-
- 
 </style>

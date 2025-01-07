@@ -11,7 +11,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     unset($_SESSION['admin_position']);
     
     // Optionally, you can destroy the session completely
-    session_destroy();
+    // session_destroy();
 }
 
 // Redirect to the login page
