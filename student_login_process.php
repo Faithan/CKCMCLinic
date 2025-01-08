@@ -29,9 +29,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($student_password === $student['password']) {
             // Password matches, set all session variables
             $_SESSION['student_logged_in'] = true;
-            foreach ($student as $key => $value) {
-                $_SESSION[$key] = $value;
-            }
+            // Password matches, set student-specific session variables
+            $_SESSION['student'] = [
+                'logged_in' => true,
+                'user_id' => $student['user_id'],
+                'student_id' => $student['student_id'],
+                'password' => $student['password'], // Optional: consider not storing raw passwords in session
+                'first_name' => $student['first_name'],
+                'middle_name' => $student['middle_name'],
+                'last_name' => $student['last_name'],
+                'extension' => $student['extension'],
+                'email' => $student['email'],
+                'gender' => $student['gender'],
+                'birthdate' => $student['birthdate'],
+                'age' => $student['age'],
+                'birth_place' => $student['birth_place'],
+                'marital_status' => $student['marital_status'],
+                'address' => $student['address'],
+                'religion' => $student['religion'],
+                'additional_info' => $student['additional_info'],
+                'department' => $student['department'],
+                'year_level' => $student['year_level'],
+                'profile_picture' => $student['profile_picture'],
+                'blood_pressure' => $student['blood_pressure'],
+                'temperature' => $student['temperature'],
+                'pulse_rate' => $student['pulse_rate'],
+                'respiratory_rate' => $student['respiratory_rate'],
+                'height' => $student['height'],
+                'weight' => $student['weight'],
+                'eperson1_name' => $student['eperson1_name'],
+                'eperson1_phone' => $student['eperson1_phone'],
+                'eperson1_relationship' => $student['eperson1_relationship'],
+                'eperson2_name' => $student['eperson2_name'],
+                'eperson2_phone' => $student['eperson2_phone'],
+                'eperson2_relationship' => $student['eperson2_relationship'],
+                'datetime_recorded' => $student['datetime_recorded'],
+            ];
 
             // Redirect to student dashboard
             header("Location: student_dashboard.php");
@@ -53,3 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 ?>
+
+
