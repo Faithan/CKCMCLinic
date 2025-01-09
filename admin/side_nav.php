@@ -86,7 +86,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 
 <style>
-
     .mini-menu a.active {
         background-color: #0F172A;
         color: var(--color4);
@@ -199,5 +198,37 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     .logout-btn i {
         margin-right: 5px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Main Content */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    main {
+        width: 100%;
+        height: 100%;
+        background-color: var(--backgroud-color);
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+
     }
 </style>

@@ -44,7 +44,10 @@ if ($total_students > 0) {
                 <p><strong>Department:</strong> {$row['department']}</p>
                 <p><strong>Year Level:</strong> {$row['year_level']}</p>
                 <p><strong>Email:</strong> {$row['email']}</p>
-                <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'>View Details</a>
+               <div class='button-container'>
+                    <a href='update_records.php?student_id={$row['student_id']}' class='update-btn'><i class='fa-solid fa-notes-medical'></i> Update Record</a>
+                   <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
+                </div>
             </div>
         </div>";
     }
@@ -54,4 +57,3 @@ if ($total_students > 0) {
 
 // Add total students as a hidden div for JavaScript
 echo "<div id='total-students' style='display:none;'>{$total_students}</div>";
-?>

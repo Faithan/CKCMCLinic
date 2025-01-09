@@ -8,8 +8,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit();
 }
 
-// Check for success in the URL
-$success = isset($_GET['success']) ? $_GET['success'] : '';
 
 // Fetch department options
 $departments = $conn->query("SELECT `course_name` FROM `course_tbl`");
@@ -142,40 +140,8 @@ $result = $conn->query($sql);
 
 
 
-<!-- do not touch message for add student success -->
-<script>
-    // Check for success and display SweetAlert
-    const success = "<?php echo $success; ?>";
-    if (success === "student_added") {
-        Swal.fire({
-            icon: 'success',
-            title: 'Student Added',
-            text: 'The student has been successfully added to the database.',
-            confirmButtonText: 'OK'
-        });
-    }
-</script>
-
-
 
 <style>
-    /* Main Content */
-    .main-content {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    main {
-        width: 100%;
-        height: 100%;
-        background-color: var(--backgroud-color);
-        overflow-y: scroll;
-        display: flex;
-        flex-direction: column;
-
-    }
-
     .search-container {
         width: 100%;
         display: flex;
@@ -297,15 +263,15 @@ $result = $conn->query($sql);
 
     }
 
-    .button-container{
+    .button-container {
         display: flex;
         gap: 5px;
     }
 
-    .button-container a{
+    .button-container a {
         display: inline-block;
         margin-top: 10px;
-        padding:10px;
+        padding: 10px;
         color: var(--color4);
         border-radius: 5px;
         text-decoration: none;
@@ -313,24 +279,69 @@ $result = $conn->query($sql);
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-  
 
-    .update-btn{
+
+    .update-btn {
         background-color: var(--color3);
     }
 
-    .update-btn:hover{
+    .update-btn:hover {
         background-color: var(--text-hover);
         transform: translateY(-2px);
     }
 
     .action-btn {
         background-color: var(--color1);
-      
+
     }
 
-     .action-btn:hover {
+    .action-btn:hover {
         background-color: var(--color1b);
         transform: translateY(-2px);
     }
 </style>
+
+
+
+
+
+
+
+
+
+<!-- for sweet alert messages -->
+<?php
+// Check for success in the URL
+$success = isset($_GET['success']) ? $_GET['success'] : '';
+
+?>
+<!-- do not touch message for add student success -->
+<script>
+    // Check for success and display SweetAlert
+    const success = "<?php echo $success; ?>";
+    if (success === "student_added") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Student Added',
+            text: 'The student has been successfully added to the database.',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>
+
+
+<script>
+    // Check for the status parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'update_success') {
+        Swal.fire({
+            icon: 'success',
+            title: 'Update Successful',
+            text: 'Student details have been updated successfully!',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            // Optionally redirect or clear the query parameter
+            history.replaceState(null, '', window.location.pathname);
+        });
+    }
+</script>

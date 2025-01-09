@@ -424,7 +424,7 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         .profile-pic p {
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--text-color);
+            color: var(--color4);
 
             width: 100%;
             text-align: center;
