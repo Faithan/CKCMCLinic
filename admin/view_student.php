@@ -22,7 +22,7 @@ $sql = "SELECT `user_id`, `student_id`, `password`, `first_name`, `middle_name`,
                `religion`, `additional_info`, `department`, `year_level`, `profile_picture`, 
                `blood_pressure`, `temperature`, `pulse_rate`, `respiratory_rate`, `height`, 
                `weight`, `eperson1_name`, `eperson1_phone`, `eperson1_relationship`, 
-               `eperson2_name`, `eperson2_phone`, `eperson2_relationship`, `datetime_recorded` 
+               `eperson2_name`, `eperson2_phone`, `eperson2_relationship`, `health_record`, `datetime_recorded` 
         FROM `student_tbl` 
         WHERE `student_id` = ?";
 $stmt = $conn->prepare($sql);
@@ -78,16 +78,19 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
                     'gender' => 'Gender',
                     'department' => 'Department',
                     'year_level' => 'Year Level',
-                    'blood_pressure' => 'Blood Pressure',
-                    'temperature' => 'Temperature',
-                    'pulse_rate' => 'Pulse Rate',
-                    'respiratory_rate' => 'Respiratory Rate',
+                    'blood_pressure' => 'Blood Pressure (mmHg)',
+                    'temperature' => 'Temperature (°C)',
+                    'pulse_rate' => 'Pulse Rate (beat/min)',
+                    'respiratory_rate' => 'Respiratory Rate (breath/min)',
+                    'height' => 'Height (meters)',
+                    'weight' => 'Weight (kg)',
                     'eperson1_name' => 'Emergency Person1 Name',
                     'eperson2_name' => 'Emergency Person2 Name',
                     'eperson1_phone' => 'Emergency Person1 Phone',
                     'eperson2_phone' => 'Emergency Person2 Phone',
                     'eperson1_relationship' => 'Emergency Person1 Relationship',
                     'eperson2_relationship' => 'Emergency Person2 Relationship',
+                    'health_record' => 'Health Record',
                     // Add more custom labels as needed
                 ];
 
@@ -119,9 +122,29 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
 
             <div class="button-container">
                 <a href="students.php" class="back-btn"><i class="fa-solid fa-person-walking-arrow-loop-left"></i> Return</a>
+                <a href="javascript:void(0)" onclick="confirmDelete('<?php echo $student_id; ?>')" class="delete-btn" style="color:var(--text-color2)"><i class="fa-solid fa-trash-can"></i> Delete Student?</a>
                 <a href="edit_student.php?student_id=<?php echo $student['student_id']; ?>" class="edit-btn"><i class="fa-solid fa-user-pen"></i> Edit</a>
             </div>
 
+            <script>
+                function confirmDelete(studentId) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Deleting student is only used if there is adding error e.g. wrong student information, etc. If the student is dropped out or already graduated, I suggest you update its status.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to PHP deletion handler
+                            window.location.href = `delete_student.php?student_id=${studentId}`;
+                        }
+                    });
+                }
+            </script>
 
         </div>
     </div>
@@ -230,6 +253,11 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
 
     .edit-btn:hover {
         background-color: var(--color2b);
+        transform: translateY(-2px);
+    }
+
+    .delete-btn:hover {
+        text-decoration: underline  ;
         transform: translateY(-2px);
     }
 </style>

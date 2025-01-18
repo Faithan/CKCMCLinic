@@ -209,27 +209,27 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                     <strong>Vital Signs:</strong>
                     <div class="input-mini-container">
                         <div class="input-container">
-                            <label for="">Blood Pressure:</label>
+                            <label for="">Blood Pressure (#/# mmHg):</label>
                             <input type="text" name="blood_pressure">
                         </div>
                         <div class="input-container">
-                            <label for="">Temperature:</label>
+                            <label for="">Temperature (# °C):</label>
                             <input type="number" name="temperature">
                         </div>
                         <div class="input-container">
-                            <label for="">Pulse Rate:</label>
+                            <label for="">Pulse Rate (# beat/min):</label>
                             <input type="text" name="pulse_rate">
                         </div>
                         <div class="input-container">
-                            <label for="">Respiratory Rate:</label>
+                            <label for="">Respiratory Rate (# breath/min):</label>
                             <input type="text" name="respiratory_rate">
                         </div>
                         <div class="input-container">
-                            <label for="">Height:</label>
+                            <label for="">Height (# meters):</label>
                             <input type="text" name="height">
                         </div>
                         <div class="input-container">
-                            <label for="">Weight:</label>
+                            <label for="">Weight (# kg):</label>
                             <input type="text" name="weight">
                         </div>
                     </div>
@@ -268,7 +268,14 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 
 
-
+                    <div class="input-mini-container">
+                        <div class="input-container">
+                            <label for="">Other health-related Information not listed above:</label>
+                            <textarea name="health_record" id=""></textarea>
+                        </div>
+ 
+                       
+                    </div>
 
                 </div>
 
@@ -477,6 +484,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         padding: 5px;
         color: var(--color1);
         min-width: 250px;
+    }
+    .input-container textarea {
+        padding: 5px;
+        color: var(--color1);
+        min-width: 800px;
     }
 
 

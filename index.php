@@ -40,7 +40,6 @@ session_start();
 
             <button type="submit">Login</button>
         </form>
-        <a href="#">Forgot Password?</a>
     </div>
 
     <!-- Loading Screen -->

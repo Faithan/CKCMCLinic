@@ -44,6 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $eperson2_phone = $_POST['eperson2_phone'];
     $eperson2_relationship = $_POST['eperson2_relationship'];
 
+
+    $health_record = $_POST['health_record'];
+
     // Image upload
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
         $profile_picture = $_FILES['profile_picture'];
@@ -72,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insert the data into the database
     try {
-        $stmt = $conn->prepare("INSERT INTO `student_tbl`(`student_id`, `password`, `first_name`, `middle_name`, `last_name`, `extension`, `email`, `gender`, `birthdate`, `age`, `birth_place`, `marital_status`, `address`, `religion`, `additional_info`, `department`, `year_level`, `profile_picture`, `blood_pressure`, `temperature`, `pulse_rate`, `respiratory_rate`, `height`, `weight`, `eperson1_name`, `eperson1_phone`, `eperson1_relationship`, `eperson2_name`, `eperson2_phone`, `eperson2_relationship`, `datetime_recorded`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `student_tbl`(`student_id`, `password`, `first_name`, `middle_name`, `last_name`, `extension`, `email`, `gender`, `birthdate`, `age`, `birth_place`, `marital_status`, `address`, `religion`, `additional_info`, `department`, `year_level`, `profile_picture`, `blood_pressure`, `temperature`, `pulse_rate`, `respiratory_rate`, `height`, `weight`, `eperson1_name`, `eperson1_phone`, `eperson1_relationship`, `eperson2_name`, `eperson2_phone`, `eperson2_relationship`, `health_record`, `datetime_recorded`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Bind the parameters
-        $stmt->bind_param("sssssssssssssssssssssssssssssss", $student_id, $password, $first_name, $middle_name, $last_name, $extension, $email, $gender, $birthdate, $age, $birth_place, $marital_status, $address, $religion, $additional_info, $department, $year_level, $profile_picture_name, $blood_pressure, $temperature, $pulse_rate, $respiratory_rate, $height, $weight, $eperson1_name, $eperson1_phone, $eperson1_relationship, $eperson2_name, $eperson2_phone, $eperson2_relationship, $datetime_recorded);
+        $stmt->bind_param("ssssssssssssssssssssssssssssssss", $student_id, $password, $first_name, $middle_name, $last_name, $extension, $email, $gender, $birthdate, $age, $birth_place, $marital_status, $address, $religion, $additional_info, $department, $year_level, $profile_picture_name, $blood_pressure, $temperature, $pulse_rate, $respiratory_rate, $height, $weight, $eperson1_name, $eperson1_phone, $eperson1_relationship, $eperson2_name, $eperson2_phone, $eperson2_relationship, $health_record, $datetime_recorded);
 
         if ($stmt->execute()) {
             header("Location: students.php?success=student_added");

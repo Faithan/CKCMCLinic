@@ -20,7 +20,8 @@
     --color3b: #1E293B;
     --color4: #F8FAFC;
     --color5: rgb(0, 0, 170);
-   
+    --color6: red;
+    --color6b: rgba(255, 0, 0, 0.741);
 
 }
 
@@ -45,7 +46,8 @@ body {
 
 }
 
-button {
+button,
+a {
     cursor: pointer;
 }
 

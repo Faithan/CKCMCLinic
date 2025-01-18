@@ -210,27 +210,27 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
                 </div>
                 <div class="input-fields">
                     <!-- Vital signs -->
-                    <label>Blood Pressure:</label>
+                    <label>Blood Pressure (#/# mmHg):</label>
                     <input type="text" name="blood_pressure" value="<?php echo htmlspecialchars($student['blood_pressure']); ?>">
                 </div>
                 <div class="input-fields">
-                    <label>Temperature:</label>
+                    <label>Temperature (# °C):</label>
                     <input type="text" name="temperature" value="<?php echo htmlspecialchars($student['temperature']); ?>">
                 </div>
                 <div class="input-fields">
-                    <label>Pulse Rate:</label>
+                    <label>Pulse Rate (# beat/min):</label>
                     <input type="text" name="pulse_rate" value="<?php echo htmlspecialchars($student['pulse_rate']); ?>">
                 </div>
                 <div class="input-fields">
-                    <label>Respiratory Rate:</label>
+                    <label>Respiratory Rate (# breath/min):</label>
                     <input type="text" name="respiratory_rate" value="<?php echo htmlspecialchars($student['respiratory_rate']); ?>">
                 </div>
                 <div class="input-fields">
-                    <label>Height:</label>
+                    <label>Height (# meters):</label>
                     <input type="text" name="height" value="<?php echo htmlspecialchars($student['height']); ?>">
                 </div>
                 <div class="input-fields">
-                    <label>Weight:</label>
+                    <label>Weight (# kg):</label>
                     <input type="text" name="weight" value="<?php echo htmlspecialchars($student['weight']); ?>">
                 </div>
                 <div class="input-fields">

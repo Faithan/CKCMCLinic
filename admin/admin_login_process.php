@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $admin['admin_id'];
             $_SESSION['admin_username'] = $admin['admin_username'];
+            $_SESSION['admin_password'] = $admin['admin_password'];
             $_SESSION['admin_name'] = $admin['first_name'] . ' ' . $admin['last_name'];
             $_SESSION['admin_position'] = $admin['admin_position'];
 

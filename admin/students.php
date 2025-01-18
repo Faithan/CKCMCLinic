@@ -158,9 +158,9 @@ $result = $conn->query($sql);
     .search-container input,
     .search-container select {
         padding: 5px;
-        background-color: #E7E9EB;
+        background-color: var(--background-color);
         border: 1px solid;
-        color: var(--text-color2);
+        color: var(--text-color);
     }
 
 
@@ -338,6 +338,22 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
             icon: 'success',
             title: 'Update Successful',
             text: 'Student details have been updated successfully!',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            // Optionally redirect or clear the query parameter
+            history.replaceState(null, '', window.location.pathname);
+        });
+    }
+</script>
+
+<script>
+    // Check for the status parameter in the URL
+    const urlParams2 = new URLSearchParams(window.location.search);
+    if (urlParams2.get('status') === 'delete_success') {
+        Swal.fire({
+            icon: 'success',
+            title: 'Delete Successful',
+            text: 'Student have been deleted successfully!',
             confirmButtonText: 'OK'
         }).then(() => {
             // Optionally redirect or clear the query parameter

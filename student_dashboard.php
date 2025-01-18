@@ -186,7 +186,7 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
                 <!-- Add records content here -->
                 <div class="record-header">
                     <h2>Records</h2>
-                    <a href=""><i class="fa-solid fa-bell-concierge"></i> Request Appointment</a>
+                    <!-- <a href=""><i class="fa-solid fa-bell-concierge"></i> Request Appointment</a> -->
                 </div>
                 <div class="record-container">
 

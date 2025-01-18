@@ -24,8 +24,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <div class="mini-menu">
                 <label for="">Operation</label>
-                <a href="appointments.php" class="<?php echo ($current_page == 'appointments.php') ? 'active' : ''; ?>"><i class="fa-solid fa-calendar-day"></i> Appointments</a>
                 <a href="students.php" class="<?php echo ($current_page == 'students.php') ? 'active' : ''; ?>"><i class="fa-solid fa-user-graduate"></i> Students</a>
+                <a href="records.php" class="<?php echo ($current_page == 'records.php') ? 'active' : ''; ?>"><i class="fa-solid fa-clipboard"></i>  Records</a>
             </div>
 
             <div class="mini-menu">
