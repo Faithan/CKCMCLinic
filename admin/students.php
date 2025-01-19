@@ -91,7 +91,7 @@ $result = $conn->query($sql);
                                 <p><strong>Year Level:</strong> {$row['year_level']}</p>
                                 <p><strong>Email:</strong> {$row['email']}</p>
                                 <div class='button-container'>
-                                <a href='update_records.php?student_id={$row['student_id']}' class='update-btn'><i class='fa-solid fa-notes-medical'></i> Update Record</a>
+                                 <button class='update-btn' onclick='showUpdateModal(\"{$row['student_id']}\", \"{$full_name}\", \"{$row['department']}\")'><i class='fa-solid fa-notes-medical'></i> Update Record</button>
                                  <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
                                 </div>
                                  </div>
@@ -109,33 +109,263 @@ $result = $conn->query($sql);
             </div>
 
         </main>
-
-
-
     </div>
-    <script>
-        function filterStudents() {
-            const search = document.getElementById('search').value;
-            const department = document.getElementById('department').value;
-            const yearLevel = document.getElementById('year_level').value;
-            const gender = document.getElementById('gender').value;
 
-            const queryString = `?search=${search}&department=${department}&year_level=${yearLevel}&gender=${gender}`;
-            fetch(`fetch_students.php${queryString}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('students-card-container').innerHTML = data;
 
-                    // Update total students
-                    const totalStudents = document.getElementById('total-students').textContent;
-                    document.getElementById('total-students-label').textContent = totalStudents;
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
+
+
+
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function filterStudents() {
+        const search = document.getElementById('search').value;
+        const department = document.getElementById('department').value;
+        const yearLevel = document.getElementById('year_level').value;
+        const gender = document.getElementById('gender').value;
+
+        const queryString = `?search=${search}&department=${department}&year_level=${yearLevel}&gender=${gender}`;
+        fetch(`fetch_students.php${queryString}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('students-card-container').innerHTML = data;
+
+                // Update total students
+                const totalStudents = document.getElementById('total-students').textContent;
+                document.getElementById('total-students-label').textContent = totalStudents;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+
+
+
+
+
+
+
+<!-- Update Modal -->
+<div id="update-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Update Record</h3>
+        <form id="update-form" method="POST">
+            <input type="hidden" id="student_id" name="student_id">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" readonly>
+            <label for="student_department">Department:</label>
+            <input type="text" id="student_department" name="student_department" readonly>
+            <label for="chief_complaint">Chief Complaint:</label>
+            <textarea id="chief_complaint" name="chief_complaint" required></textarea>
+            <label for="treatment">Treatment:</label>
+            <textarea id="treatment" name="treatment" required></textarea>
+            <button type="submit">Save Record</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function showUpdateModal(studentId, fullName, department) {
+        document.getElementById('student_id').value = studentId;
+        document.getElementById('student_name').value = fullName;
+        document.getElementById('student_department').value = department;
+        document.getElementById('update-modal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('update-modal').style.display = 'none';
+    }
+
+    document.getElementById('update-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        fetch('insert_record.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // Redirected indicates success
+                    window.location.href = response.url;
+                } else {
+                    return response.text(); // Read the error message
+                }
+            })
+            .then(data => {
+                if (data) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data || 'An unexpected error occurred. Please try again.'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred. Please check your connection.'
+                });
+            });
+    });
+</script>
+
+
+<style>
+    /* Modal Background */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        overflow: auto;
+    }
+
+    /* Modal Content Box */
+    .modal-content {
+        top: 10%;
+        left: 40%;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 500px;
+        padding: 20px;
+        animation: fadeIn 0.3s ease-out;
+        position: relative;
+    }
+
+    /* Close Button */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #555;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+        color: #000;
+    }
+
+    /* Form Elements */
+    .modal-content h3 {
+        margin-top: 0;
+        font-size: 2rem;
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .modal-content label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: var(--text-color);
+        font-size: 1.2rem;
+    }
+
+    .modal-content input,
+    .modal-content textarea,
+    .modal-content button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        outline: none;
+        transition: border-color 0.3s ease;
+        color: var(--color1);
+    }
+
+    .modal-content input:focus,
+    .modal-content textarea:focus {
+        border-color: var(--color1);
+    }
+
+    .modal-content textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Submit Button */
+    .modal-content button {
+        background-color: var(--color1);
+        color: var(--color4);
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+        background-color: var(--color1b);
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+        .modal-content {
+            padding: 15px;
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+        }
+
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content button {
+            font-size: 1.4rem;
+            color: var(--color1);
+        }
+    }
+</style>
 
 
 
@@ -159,7 +389,7 @@ $result = $conn->query($sql);
     .search-container select {
         padding: 5px;
         background-color: var(--background-color);
-        border: 1px solid;
+        border: 1px solid var(--border-color);
         color: var(--text-color);
     }
 
@@ -193,7 +423,7 @@ $result = $conn->query($sql);
     .footer-container a:hover {
         color: var(--color1);
         transform: translateY(-2px);
-        transition: ease-in-out 0.3s;
+
 
     }
 
@@ -282,6 +512,15 @@ $result = $conn->query($sql);
 
 
     .update-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 5px;
+        font-size: 1rem;
+        color: var(--color4);
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
         background-color: var(--color3);
     }
 

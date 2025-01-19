@@ -27,7 +27,7 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         <!-- Overview Section -->
         <section class="profile-overview" id="profile">
             <div class="profile-container">
-                
+
                 <div class="profile-pic">
                     <img id="profilePicture" src="student_pic/<?php echo $_SESSION['student']['profile_picture']; ?>" alt="Profile Picture">
                     <label for=""><?php echo $_SESSION['student']['first_name'] . ' ' . $_SESSION['student']['middle_name'] . ' ' . $_SESSION['student']['last_name'] . ' ' . $_SESSION['student']['extension']; ?></label>
@@ -179,6 +179,10 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
                         <label for=""><i class="fa-solid fa-info"></i> Additional Info</label>
                         <p><?php echo !empty($_SESSION['student']['additional_info']) ? $_SESSION['student']['additional_info'] : 'N/A'; ?></p>
                     </div>
+                    <div class="info-container">
+                        <label for="">Other Health Related information</label>
+                        <p><?php echo !empty($_SESSION['student']['health_record']) ? $_SESSION['student']['additional_info'] : 'N/A'; ?></p>
+                    </div>
                 </div>
             </div>
 
@@ -329,6 +333,7 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         padding: 20px;
         border-radius: 5px;
         border: 1px solid var(--border-color);
+        animation: fadeIn 0.6s ease-in-out;
     }
 
 
@@ -469,6 +474,7 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         gap: 20px;
         flex-wrap: wrap;
         justify-content: center;
+        animation: fadeIn 0.6s ease-in-out;
     }
 
     .vital-signs {

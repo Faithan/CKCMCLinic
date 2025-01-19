@@ -45,7 +45,7 @@ if ($total_students > 0) {
                 <p><strong>Year Level:</strong> {$row['year_level']}</p>
                 <p><strong>Email:</strong> {$row['email']}</p>
                <div class='button-container'>
-                    <a href='update_records.php?student_id={$row['student_id']}' class='update-btn'><i class='fa-solid fa-notes-medical'></i> Update Record</a>
+                    <button class='update-btn' onclick='showUpdateModal(\"{$row['student_id']}\", \"{$full_name}\", \"{$row['department']}\")'><i class='fa-solid fa-notes-medical'></i> Update Record</button>
                    <a href='view_student.php?student_id={$row['student_id']}' class='action-btn'><i class='fa-solid fa-eye'></i> View Details</a>
                 </div>
             </div>

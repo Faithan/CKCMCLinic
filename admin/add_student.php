@@ -533,8 +533,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     .button-container a:hover {
         color: var(--color1);
         transform: translateY(-2px);
-        transition: ease-in-out 0.3s;
-      
+
     }
 
     .button-container button {
