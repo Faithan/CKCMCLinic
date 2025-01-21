@@ -7,6 +7,17 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
     header("Location: index.php");
     exit();
 }
+
+
+// Fetch records for the logged-in student
+$student_id = $_SESSION['student']['student_id'];
+$sql = "SELECT `record_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment` 
+        FROM `record_tbl` 
+        WHERE `student_id` = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $student_id);
+$stmt->execute();
+$records = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -190,17 +201,35 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
                 <!-- Add records content here -->
                 <div class="record-header">
                     <h2>Records</h2>
-                    <!-- <a href=""><i class="fa-solid fa-bell-concierge"></i> Request Appointment</a> -->
                 </div>
                 <div class="record-container">
-
+                    <?php if ($records->num_rows > 0): ?>
+                        <table class="record-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Complaint</th>
+                                    <th>Treatment</th>
+        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($record = $records->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($record['record_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['chief_complaint']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['treatment']); ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <p>No records found.</p>
+                    <?php endif; ?>
                 </div>
             </div>
 
         </section>
-
-
-
 
     </main>
     <!-- Footer Section -->
@@ -208,19 +237,24 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         <p>&copy; <?php echo date("Y"); ?> CKCM Clinic. All rights reserved.</p>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const burgerMenu = document.querySelector('.burger-menu');
-
-            navLinks.classList.toggle('active');
-            burgerMenu.classList.toggle('open');
-        }
-    </script>
 </body>
 
 </html>
 
+
+
+
+
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        const burgerMenu = document.querySelector('.burger-menu');
+
+        navLinks.classList.toggle('active');
+        burgerMenu.classList.toggle('open');
+    }
+</script>
 
 <style>
     body {
@@ -232,13 +266,6 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
         display: flex;
         flex-direction: column;
     }
-
-
-
-
-
-
-
 
 
     main {
@@ -380,6 +407,41 @@ if (!isset($_SESSION['student_logged_in']) || $_SESSION['student_logged_in'] !==
 
     }
 
+
+
+    .record-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        overflow: hidden;
+
+    }
+
+    .record-table thead {
+        background-color: var(--color3b);
+        color: white;
+        text-align: left;
+    }
+
+    .record-table th,
+    .record-table td {
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+    }
+
+    .record-table th {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .record-table tbody tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .record-table td {
+        color: #333;
+        font-size: 1rem;
+    }
 
 
 

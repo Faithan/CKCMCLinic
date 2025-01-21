@@ -179,7 +179,7 @@ $result = $conn->query($sql);
             <textarea id="chief_complaint" name="chief_complaint" required></textarea>
             <label for="treatment">Treatment:</label>
             <textarea id="treatment" name="treatment" required></textarea>
-            <button type="submit">Save Record</button>
+            <button type="submit"><i class="fa-solid fa-file-arrow-up"></i> Save Record</button>
         </form>
     </div>
 </div>
@@ -323,7 +323,7 @@ $result = $conn->query($sql);
 
     /* Submit Button */
     .modal-content button {
-        background-color: var(--color1);
+        background-color: var(--color3b);
         color: var(--color4);
         border: none;
         font-weight: bold;
@@ -332,7 +332,7 @@ $result = $conn->query($sql);
     }
 
     .modal-content button:hover {
-        background-color: var(--color1b);
+        background-color: var(--color3);
     }
 
     /* Fade-in Animation */
@@ -350,20 +350,7 @@ $result = $conn->query($sql);
 
     /* Mobile Responsiveness */
     @media (max-width: 600px) {
-        .modal-content {
-            padding: 15px;
-        }
-
-        .modal-content h3 {
-            font-size: 1.8rem;
-        }
-
-        .modal-content input,
-        .modal-content textarea,
-        .modal-content button {
-            font-size: 1.4rem;
-            color: var(--color1);
-        }
+      
     }
 </style>
 

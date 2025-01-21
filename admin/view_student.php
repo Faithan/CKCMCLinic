@@ -38,6 +38,18 @@ if ($result->num_rows === 0) {
 $student = $result->fetch_assoc();
 $full_name = $student['first_name'] . ' ' . $student['middle_name'] . ' ' . $student['last_name'] . ' ' . $student['extension'];
 $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Default profile picture
+
+
+// Fetch records for the selected student
+$record_sql = "SELECT `record_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment` 
+               FROM `record_tbl` 
+               WHERE `student_id` = ?";
+$record_stmt = $conn->prepare($record_sql);
+$record_stmt->bind_param("s", $student_id);
+$record_stmt->execute();
+$record_result = $record_stmt->get_result();
+
+
 ?>
 
 
@@ -116,7 +128,36 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
             <div class="record-base-container">
                 <h2>Records</h2>
                 <div class="record-container">
-
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Record Date</th>
+                                <th>Student Name</th>
+                                <th>Department</th>
+                                <th>Chief Complaint</th>
+                                <th>Treatment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if ($record_result->num_rows > 0): ?>
+                                <?php while ($record = $record_result->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($record['record_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['record_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['student_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['student_department']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['chief_complaint']); ?></td>
+                                        <td><?php echo htmlspecialchars($record['treatment']); ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6">No records found for this student.</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -125,26 +166,6 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
                 <a href="javascript:void(0)" onclick="confirmDelete('<?php echo $student_id; ?>')" class="delete-btn" style="color:var(--text-color2)"><i class="fa-solid fa-trash-can"></i> Delete Student?</a>
                 <a href="edit_student.php?student_id=<?php echo $student['student_id']; ?>" class="edit-btn"><i class="fa-solid fa-user-pen"></i> Edit</a>
             </div>
-
-            <script>
-                function confirmDelete(studentId) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "Deleting student is only used if there is adding error e.g. wrong student information, etc. If the student is dropped out or already graduated, I suggest you update its status.",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Yes, delete it!',
-                        cancelButtonText: 'Cancel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Redirect to PHP deletion handler
-                            window.location.href = `delete_student.php?student_id=${studentId}`;
-                        }
-                    });
-                }
-            </script>
 
         </div>
     </div>
@@ -157,7 +178,73 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
 
 
 
+<script>
+    function confirmDelete(studentId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Deleting student is only used if there is adding error e.g. wrong student information, etc. If the student is dropped out or already graduated, I suggest you update its status.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to PHP deletion handler
+                window.location.href = `delete_student.php?student_id=${studentId}`;
+            }
+        });
+    }
+</script>
 
+
+
+
+
+
+<style>
+    .record-container {
+        height: 100px;
+        overflow-y: scroll;
+        background-color: var(--background-color);
+        border: 1px solid var(--border-color);
+    }
+
+    .record-container table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .record-container th,
+    .record-container td {
+        border: 1px solid var(--border-color);
+        padding: 5px;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .record-container th {
+        background-color: var(--color3b);
+        color: var(--color4);
+        font-weight: bold;
+        border-top: 0;
+    }
+
+    .record-container tbody tr:nth-child(odd) {
+        background-color: var(--color4);
+    }
+
+
+    .record-container td {
+        color: var(--text-color);
+    }
+
+    .record-container h2 {
+        margin-bottom: 10px;
+        color: var(--color4);
+    }
+</style>
 
 <style>
     .details-container {
@@ -214,12 +301,6 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
         width: 100%;
     }
 
-    .record-container {
-        height: 100px;
-        overflow-y: scroll;
-        background-color: var(--background-color);
-        border: 1px solid var(--border-color);
-    }
 
     .button-container {
         display: flex;
@@ -257,7 +338,7 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
     }
 
     .delete-btn:hover {
-        text-decoration: underline  ;
+        color: var(--color6);
         transform: translateY(-2px);
     }
 </style>
