@@ -1,7 +1,9 @@
+
+
 <header>
     <div class="admin-profile">
-        <img src="../admin_pic/nurse.png" alt="">
-        <p><strong style="text-transform:capitalize;"><?php  echo $_SESSION['admin_position']?> | </strong> <?php echo $_SESSION['admin_name'] ?></p>
+        <img src="../admin_pic/<?php echo $_SESSION['admin_pic']; ?>"  alt="">
+        <p><strong style="text-transform:capitalize;"><?php  echo $_SESSION['admin_position']?> | </strong><?php echo $_SESSION['admin_name'] ?></p>
     
     </div>
     <div class="icon-container">

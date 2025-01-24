@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $admin_password = trim($_POST['admin_password']);
 
     // Prepare and execute query
-    $stmt = $conn->prepare("SELECT `admin_id`, `admin_username`, `admin_password`, `first_name`, `middle_name`, `last_name`, `admin_position` 
+    $stmt = $conn->prepare("SELECT `admin_id`, `admin_username`, `admin_password`, `first_name`, `middle_name`, `last_name`, `admin_position`, `admin_pic` 
                             FROM `admin_tbl` WHERE `admin_username` = ?");
     $stmt->bind_param("s", $admin_username);
     $stmt->execute();
@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['admin_password'] = $admin['admin_password'];
             $_SESSION['admin_name'] = $admin['first_name'] . ' ' . $admin['last_name'];
             $_SESSION['admin_position'] = $admin['admin_position'];
+            $_SESSION['admin_pic'] = $admin['admin_pic'];
 
             // Redirect to admin dashboard
             header("Location: dashboard.php");

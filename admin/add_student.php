@@ -479,16 +479,43 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     }
 
 
-    .input-container input,
-    .input-container select {
-        padding: 5px;
-        color: var(--color1);
-        min-width: 250px;
-    }
+ 
     .input-container textarea {
         padding: 5px;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        border: 0;
+        border-bottom: 1px solid var(--border-color);
+        min-width: 700px;
+    }
+
+    .input-container textarea:focus{
+        background-color: var(--background-color);
         color: var(--color1);
-        min-width: 800px;
+        border: 0;
+        border-bottom: 1px solid var(--color1);
+        outline: none;
+    }
+
+
+    .input-container input, 
+    .input-container select {
+        min-width: 250px;
+        padding: 8px;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        border: 0;
+        border-bottom: 1px solid var(--border-color)
+    }
+
+    .input-container input:focus,
+    .input-container select:focus {
+        
+        background-color: var(--background-color);
+        color: var(--color1);
+        border: 0;
+        border-bottom: 1px solid var(--color1);
+        outline: none;
     }
 
 

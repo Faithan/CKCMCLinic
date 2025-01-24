@@ -325,12 +325,27 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
     }
 
 
-    .input-fields input,
-    .input-fields select {
-        padding: 5px;
-        color: var(--color1);
 
+    .input-fields input, 
+    .input-fields select {
+        width: 100%;
+        padding: 8px;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        border: 0;
+        border-bottom: 1px solid var(--border-color)
     }
+
+    .input-fields input:focus,
+    .input-fields select:focus {
+        
+        background-color: var(--background-color);
+        color: var(--color1);
+        border: 0;
+        border-bottom: 1px solid var(--color1);
+        outline: none;
+    }
+
 
     .button-container {
         display: flex;
@@ -339,7 +354,6 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
 
 
     .button-container a {
-
         padding: 10px;
         color: var(--color4);
         text-decoration: none;
