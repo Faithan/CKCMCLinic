@@ -301,19 +301,22 @@ $result = $conn->query($sql);
     .modal-content textarea,
     .modal-content button {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1.4rem;
-        outline: none;
-        transition: border-color 0.3s ease;
-        color: var(--color1);
+        padding: 8px;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        border: 0;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 10px;
+        
     }
 
     .modal-content input:focus,
     .modal-content textarea:focus {
-        border-color: var(--color1);
+        background-color: var(--background-color);
+        color: var(--color1);
+        border: 0;
+        border-bottom: 1px solid var(--color1);
+        outline: none;
     }
 
     .modal-content textarea {

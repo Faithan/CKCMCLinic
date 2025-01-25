@@ -29,9 +29,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
 
             <div class="mini-menu">
-                <label for="">Extra</label>
-                <a href="settings.php" class="<?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gears"></i> Settings</a>
-
+                <label for="">Settings</label>
+                <a href="admin_settings.php" class="<?php echo ($current_page == 'admin_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gears"></i> Admin</a>
+                <a href="course_settings.php" class="<?php echo ($current_page == 'course_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-building"></i> Courses</a>
             </div>
         </div>
 
