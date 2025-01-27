@@ -308,7 +308,7 @@ $result = $conn->query($sql);
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 10px;
         
-    }
+    } 
 
     .modal-content input:focus,
     .modal-content textarea:focus {

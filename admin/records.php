@@ -60,7 +60,7 @@ $result = $conn->query($sql);
                         <!-- Table rows will be dynamically populated -->
                         <?php
                         // Initial fetch to show all records on page load
-                        $sql = "SELECT `record_id`, `student_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment` FROM `record_tbl`";
+                        $sql = "SELECT `record_id`, `student_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment` FROM `record_tbl` ORDER BY record_id DESC";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0):
