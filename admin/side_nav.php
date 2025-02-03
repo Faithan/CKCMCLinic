@@ -19,13 +19,33 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <div class="mini-menu">
                 <label for="">Home</label>
                 <a href="dashboard.php" class="<?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
-                <a href="reports.php" class="<?php echo ($current_page == 'reports.php') ? 'active' : ''; ?>"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+
+
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa-solid fa-chart-pie"></i> Reports <i class="fa-solid fa-chevron-down dropdown-icon" style="margin-left:20px;"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="student_reports.php" class="<?php echo ($current_page == 'student_reports.php') ? 'active' : ''; ?>">
+                            <i class="fa-solid fa-user-graduate"></i> Student Reports
+                        </a>
+                        <a href="record_reports.php" class="<?php echo ($current_page == 'record_reports.php') ? 'active' : ''; ?>">
+                            <i class="fa-solid fa-clipboard"></i> Record Reports
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+
+
             </div>
 
             <div class="mini-menu">
                 <label for="">Operation</label>
                 <a href="students.php" class="<?php echo ($current_page == 'students.php') ? 'active' : ''; ?>"><i class="fa-solid fa-user-graduate"></i> Students</a>
-                <a href="records.php" class="<?php echo ($current_page == 'records.php') ? 'active' : ''; ?>"><i class="fa-solid fa-clipboard"></i>  Records</a>
+                <a href="records.php" class="<?php echo ($current_page == 'records.php') ? 'active' : ''; ?>"><i class="fa-solid fa-clipboard"></i> Records</a>
             </div>
 
             <div class="mini-menu">
@@ -71,9 +91,87 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 </div>
 
+<style>
+    /* Dropdown styling */
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        
+    }
+
+    .dropdown-toggle {
+        text-decoration: none;
+        font-size: 1.4rem;
+        color: #d0d0d0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    
+        cursor: pointer;
+    }
+
+    .dropdown-toggle:hover {
+        background-color: var(--text-hover);
+        color: #F8FAFC;
+        transition: ease-in-out 0.3s;
+        border-radius: 5px;
+    }
+
+    /* Dropdown Icon */
+    .dropdown-icon {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Hidden by default */
+    .dropdown-menu {
+        display: none;
+        flex-direction: column;
+        padding-left: 20px;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .dropdown-menu a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #d0d0d0;
+        padding: 8px;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: var(--text-hover);
+        color: #F8FAFC;
+        transition: ease-in-out 0.3s;
+        border-radius: 5px;
+    }
+
+    /* Show dropdown when active */
+    .dropdown.active .dropdown-menu {
+        display: flex;
+        max-height: 200px;
+    }
+
+    /* Rotate dropdown icon */
+    .dropdown.active .dropdown-icon {
+        transform: rotate(180deg);
+    }
+</style>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdownToggle = document.querySelector(".dropdown-toggle");
+        const dropdown = document.querySelector(".dropdown");
 
+        dropdownToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            dropdown.classList.toggle("active");
+        });
+    });
+</script>
 
 
 

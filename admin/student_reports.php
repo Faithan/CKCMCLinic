@@ -131,6 +131,16 @@ while ($record = $recordsResult->fetch_assoc()) {
 
 </html>
 
+
+
+
+
+
+
+
+
+
+
 <style>
     .main-content {
         display: flex;
