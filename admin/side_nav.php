@@ -98,7 +98,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         flex-direction: column;
         position: relative;
 
-        
+
     }
 
     .dropdown-toggle {
@@ -108,7 +108,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         padding: 10px;
         display: flex;
         align-items: center;
-    
+
         cursor: pointer;
     }
 

@@ -511,11 +511,12 @@ $result = $conn->query($sql);
         text-decoration: none;
         font-weight: bold;
         transition: background-color 0.3s ease, transform 0.2s ease;
-        background-color: var(--color3);
+        background-color: var(--color3b);
+        border: transparent;
     }
 
     .update-btn:hover {
-        background-color: var(--text-hover);
+        background-color: var(--color3);
         transform: translateY(-2px);
     }
 
