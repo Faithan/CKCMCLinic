@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 03:56 AM
+-- Generation Time: Feb 11, 2025 at 01:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `ckcmclinic_db`
---  
+--
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE `admin_tbl` (
 --
 
 INSERT INTO `admin_tbl` (`admin_id`, `admin_username`, `admin_password`, `first_name`, `middle_name`, `last_name`, `admin_position`, `admin_pic`) VALUES
-(1, 'admin_nurse', 'admin', 'first name', 'middle name', 'last name', 'nurse', '');
+(1, 'admin_nurse', 'admin', 'Scarlet', 'middle name', 'Marinduque', 'School Nurse', 'nurse.png');
 
 -- --------------------------------------------------------
 
@@ -93,9 +93,9 @@ CREATE TABLE `record_tbl` (
 --
 
 INSERT INTO `record_tbl` (`record_id`, `student_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment`) VALUES
-(11, 228224, '2025-01-21', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Paracetamol'),
-(12, 228375, '2025-01-21', 'KC  V. Marcel ', 'Bachelor of Science in Computer Science', 'Headache', 'Aspirin'),
-(13, 228719, '2025-01-21', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'Headache', 'Aspirin');
+(11, 228224, '2025-01-21', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'HeadAche', 'Paracetamol'),
+(12, 228375, '2025-01-21', 'KC  V. Marcel ', 'Bachelor of Science in Computer Science', 'dgfdfgd', 'asdasd'),
+(13, 228719, '2025-01-21', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'headache', 'aspirin');
 
 -- --------------------------------------------------------
 
@@ -217,7 +217,7 @@ ALTER TABLE `admin_tbl`
 -- AUTO_INCREMENT for table `course_tbl`
 --
 ALTER TABLE `course_tbl`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `record_tbl`
