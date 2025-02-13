@@ -262,13 +262,11 @@ while ($record = $recordsResult->fetch_assoc()) {
         background: var(--color5);
     }
 
-    /* Search bar styling */
-    input[type="text"] {
-        padding: 8px;
-        font-size: 14px;
-        width: 200px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+
+
+    #search-bar{
         margin-bottom: 20px;
     }
+    /* Search bar styling */
+ 
 </style>

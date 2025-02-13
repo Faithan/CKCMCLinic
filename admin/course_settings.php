@@ -174,9 +174,13 @@ if (isset($_GET['delete'])) {
         border: 1px solid var(--border-color);
     }
 
+    form h2{
+        color: var(--text-color);
+    }
     form label{
         font-size: 1.2rem;
         margin-bottom: 5px;
+        color: var(--text-color);
     }
 
 
@@ -184,20 +188,10 @@ if (isset($_GET['delete'])) {
     form textarea {
         width: 100%;
         padding: 8px;
-        color: var(--text-color);
-        background-color: var(--background-color);
-        border: 0;
-        border-bottom: 1px solid var(--border-color)
+     
     }
 
-    form input:focus,
-    form textarea:focus{
-        background-color: var(--background-color);
-        color: var(--color1);
-        border: 0;
-        border-bottom: 1px solid var(--color1);
-        outline: none;
-    }
+ 
 
     form button{
         padding: 5px;
@@ -224,35 +218,7 @@ if (isset($_GET['delete'])) {
      
     }
 
-    table,
-    th,
-    td {
-        border: 1px solid var(--border-color);
-      
-    }
 
-    th,
-    td {
-        padding: 5px;
-        text-align: left;
-        font-size: 1.2rem;
-    }
-
-    th {
-        background-color: var(--color3b);
-        color: var(--color4);
-       
-    }
-
-    tbody tr:nth-child(even) {
-        background-color: var(--background-color);
-        /* Alternate row color */
-    }
-
-    tbody tr:nth-child(odd) {
-        background-color: #fff;
-        /* Default row color */
-    }
 
 
     .delete-btn {

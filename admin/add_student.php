@@ -273,8 +273,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                             <label for="">Other health-related Information not listed above:</label>
                             <textarea name="health_record" id=""></textarea>
                         </div>
- 
-                       
+
+
                     </div>
 
                 </div>
@@ -288,7 +288,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 </div>
 
                 <div class="button-container">
-                    <a href="students.php"><i class="fa-solid fa-share fa-flip-horizontal"></i> Return</a>
+                    <a href="students.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i> Return</a>
                     <button type="submit" id="save-student"><i class="fa-solid fa-download"></i> Save</button>
                 </div>
             </form>
@@ -417,6 +417,17 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 
 <!-- style -->
+
+
+<style>
+    input,
+    select {
+        min-width: 250px;
+    }
+    textarea{
+        min-width: 700px;
+    }
+</style>
 <style>
     /* Main Content */
     .main-content {
@@ -447,7 +458,10 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     .add-container h2 {
         text-align: center;
         margin-bottom: 10px;
+        color: var(--text-color);
     }
+
+
 
     .input-base-container {
         display: flex;
@@ -460,6 +474,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     .input-base-container strong {
         font-size: 1.3rem;
         margin-top: 10px;
+        color: var(--text-color);
     }
 
 
@@ -478,45 +493,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         margin-top: 5px;
     }
 
-
- 
-    .input-container textarea {
-        padding: 5px;
+    .input-container label {
         color: var(--text-color);
-        background-color: var(--background-color);
-        border: 0;
-        border-bottom: 1px solid var(--border-color);
-        min-width: 700px;
-    }
-
-    .input-container textarea:focus{
-        background-color: var(--background-color);
-        color: var(--color1);
-        border: 0;
-        border-bottom: 1px solid var(--color1);
-        outline: none;
     }
 
 
-    .input-container input, 
-    .input-container select {
-        min-width: 250px;
-        padding: 8px;
-        color: var(--text-color);
-        background-color: var(--background-color);
-        border: 0;
-        border-bottom: 1px solid var(--border-color)
-    }
-
-    .input-container input:focus,
-    .input-container select:focus {
-        
-        background-color: var(--background-color);
-        color: var(--color1);
-        border: 0;
-        border-bottom: 1px solid var(--color1);
-        outline: none;
-    }
 
 
     .image-container {
@@ -526,8 +507,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         gap: 5px;
     }
 
-    .image-container label {
+    .image-container strong {
         font: 1.2rem;
+        color: var(--text-color);
     }
 
     .image-container .image-preview {
@@ -546,6 +528,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         max-height: 180px;
     }
 
+    #profile_picture {
+        background-color: transparent;
+        border: 0;
+    }
+
     .button-container {
         display: flex;
         align-items: center;
@@ -556,7 +543,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     .button-container a {
         text-decoration: none;
         font-size: 1.3rem;
+        color: var(--text-color);
     }
+
     .button-container a:hover {
         color: var(--color1);
         transform: translateY(-2px);
@@ -565,17 +554,19 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
     .button-container button {
         padding: 5px 15px;
-        font-size: 1.3rem;
-        color: var(--color4);
-        background-color: var(--color3b);
+        font-size: 1.5rem;
+        color: var(--text-color);
+        background-color:transparent;
         border-radius: 5px;
+        border: none;
+        font-weight: bold;
     }
 
     .button-container button:hover {
-        background-color: var(--color3);
+        color: var(--color1);
         transform: translateY(-2px);
         transition: ease-in-out 0.3s;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+       
     }
 
     /* @media (max-width: 1200px) {

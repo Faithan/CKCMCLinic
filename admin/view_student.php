@@ -206,8 +206,8 @@ $record_result = $record_stmt->get_result();
 <style>
     .record-container {
         height: 100px;
-        overflow-y: scroll;
-        background-color: var(--background-color);
+        overflow-y: auto;
+        background-color: var(--background-color2);
         border: 1px solid var(--border-color);
     }
 
@@ -216,33 +216,10 @@ $record_result = $record_stmt->get_result();
         border-collapse: collapse;
     }
 
-    .record-container th,
-    .record-container td {
-        border: 1px solid var(--border-color);
-        padding: 5px;
-        text-align: left;
-        font-size: 1rem;
-    }
-
-    .record-container th {
-        background-color: var(--color3b);
-        color: var(--color4);
-        font-weight: bold;
-        border-top: 0;
-    }
-
-    .record-container tbody tr:nth-child(odd) {
-        background-color: var(--color4);
-    }
-
-
-    .record-container td {
-        color: var(--text-color);
-    }
 
     .record-container h2 {
         margin-bottom: 10px;
-        color: var(--color4);
+        color: var(--text-color);
     }
 </style>
 
@@ -253,7 +230,7 @@ $record_result = $record_stmt->get_result();
         align-items: center;
         padding: 20px;
         background-color: var(--color4);
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     .details-container img {
@@ -281,6 +258,7 @@ $record_result = $record_stmt->get_result();
 
     .info strong {
         font-size: 1.2rem;
+        color: var(--text-color);
     }
 
     .info p {

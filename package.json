@@ -12,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "ckcmclinic": "file:"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3"
   }
 }

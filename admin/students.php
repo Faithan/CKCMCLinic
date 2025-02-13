@@ -254,7 +254,7 @@ $result = $conn->query($sql);
     .modal-content {
         top: 10%;
         left: 40%;
-        background-color: #fff;
+        background-color: var(--background-color);
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         width: 90%;
@@ -285,7 +285,7 @@ $result = $conn->query($sql);
         margin-top: 0;
         font-size: 2rem;
         text-align: center;
-        color: #333;
+        color: var(--text-color);
         margin-bottom: 20px;
     }
 
@@ -303,7 +303,7 @@ $result = $conn->query($sql);
         width: 100%;
         padding: 8px;
         color: var(--text-color);
-        background-color: var(--background-color);
+        background-color: var(--background-color2);
         border: 0;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 10px;
@@ -312,7 +312,7 @@ $result = $conn->query($sql);
 
     .modal-content input:focus,
     .modal-content textarea:focus {
-        background-color: var(--background-color);
+        background-color: var(--background-color2);
         color: var(--color1);
         border: 0;
         border-bottom: 1px solid var(--color1);
@@ -327,7 +327,7 @@ $result = $conn->query($sql);
     /* Submit Button */
     .modal-content button {
         background-color: var(--color3b);
-        color: var(--color4);
+        color: white;
         border: none;
         font-weight: bold;
         cursor: pointer;
@@ -369,19 +369,13 @@ $result = $conn->query($sql);
         justify-content: space-between;
         background-color: var(--color4);
         padding: 10px;
-        border: 1px solid var(--border-color);
+      
         border-bottom: 0;
         border-top: 0;
 
     }
 
-    .search-container input,
-    .search-container select {
-        padding: 5px;
-        background-color: var(--background-color);
-        border: 1px solid var(--border-color);
-        color: var(--text-color);
-    }
+
 
 
 
@@ -392,13 +386,14 @@ $result = $conn->query($sql);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid var(--border-color);
+     
         border-top: 0;
 
     }
 
     .footer-container label {
         font-size: 1.2rem;
+        color: var(--text-color);
     }
 
     .footer-container a {
@@ -433,6 +428,7 @@ $result = $conn->query($sql);
         justify-content: center;
         overflow-y: scroll;
         padding: 10px;
+     
     }
 
     /* Individual Student Card */
@@ -492,10 +488,9 @@ $result = $conn->query($sql);
         display: inline-block;
         margin-top: 10px;
         padding: 10px;
-        color: var(--color4);
+        color: white;
         border-radius: 5px;
         text-decoration: none;
-        font-weight: bold;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
@@ -506,10 +501,10 @@ $result = $conn->query($sql);
         margin-top: 10px;
         padding: 5px;
         font-size: 1rem;
-        color: var(--color4);
+        color: white;
         border-radius: 5px;
         text-decoration: none;
-        font-weight: bold;
+      
         transition: background-color 0.3s ease, transform 0.2s ease;
         background-color: var(--color3b);
         border: transparent;
@@ -522,7 +517,7 @@ $result = $conn->query($sql);
 
     .action-btn {
         background-color: var(--color1);
-
+ 
     }
 
     .action-btn:hover {
