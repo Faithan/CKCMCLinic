@@ -123,25 +123,15 @@ $admin = $result->fetch_assoc();
         margin-bottom: 5px;
         font-weight: bold;
         font-size: 1.2rem;
+        color: var(--text-color);
     }
 
     .form-group input {
         width: 100%;
         padding: 8px;
-        color: var(--text-color);
-        background-color: var(--background-color);
-        border: 0;
-        border-bottom: 1px solid var(--border-color)
+     
     }
 
-    .form-group input:focus {
-        transition: ease-in-out 0.3s;
-        background-color: var(--background-color);
-        color: var(--color1);
-        border: 0;
-        border-bottom: 1px solid var(--color1);
-        outline: none;
-    }
 
     .admin-pic-preview {
         display: block;

@@ -137,11 +137,6 @@ $result = $conn->query($sql);
 
     }
 
-    .search-container input {
-        padding: 5px;
-        border: 1px solid var(--border-color);
-        background-color: var(--background-color);
-    }
 
     .search-container a i {
         margin-right: 5px;
@@ -175,52 +170,7 @@ $result = $conn->query($sql);
         /* Prevent content overflow */
     }
 
-    .record-table th,
-    .record-table td {
-        border: 1px solid var(--border-color);
-        padding: 12px 15px;
-        /* Add more padding for better spacing */
-        text-align: left;
-        font-size: 0.95rem;
-        /* Adjust font size for readability */
-        vertical-align: middle;
-        /* Align content vertically */
-    }
 
-    .record-table th {
-        background-color: var(--color3b);
-        color: var(--color4);
-        font-weight: bold;
-        text-transform: uppercase;
-        /* Uppercase headers */
-        letter-spacing: 0.05em;
-        /* Add slight spacing for headers */
-        position: sticky;
-        /* Keep headers visible during scroll */
-        top: 0;
-        z-index: 1;
-    }
-
-    .record-table tbody tr:nth-child(even) {
-        background-color: var(--background-color);
-        /* Alternate row color */
-    }
-
-    .record-table tbody tr:nth-child(odd) {
-        background-color: #fff;
-        /* Default row color */
-    }
-
-    .record-table td {
-        color: var(--text-color);
-        word-wrap: break-word;
-        /* Wrap long text */
-        max-width: 200px;
-        /* Limit cell width */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        /* Add ellipsis for overflow text */
-    }
 
     .record-table caption {
         caption-side: top;
