@@ -196,8 +196,9 @@ if (isset($_GET['delete'])) {
     form button{
         padding: 5px;
         background-color: var(--color3b);
-        color: var(--color4);
+        color: white;
         border-radius: 5px;
+       
     }
 
     form button:hover{
