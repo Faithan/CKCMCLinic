@@ -23,6 +23,23 @@ date_default_timezone_set('Asia/Manila');
 ?>
 
 
+<?php
+
+// $servername = "sql207.infinityfree.com";
+// $username = "if0_38152864";
+// $password = "DWneC7uQxRxr8ZM";
+// $dbname = "if0_38152864_ckcmclinic_db";
+
+
+// $conn = new mysqli($servername, $username, $password, $dbname);
+
+
+// date_default_timezone_set('Asia/Manila');
+?>
+
+
+
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
