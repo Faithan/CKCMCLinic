@@ -34,15 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_id'])) {
         $records_result = $records_stmt->get_result();
         $records = $records_result->fetch_all(MYSQLI_ASSOC);
 
-        // Create PDF
-        $pdf = new TCPDF();
+        $pdf = new TCPDF('P', 'mm', array(215.9, 330.2)); // 8.5 x 13 inches in mm
+        $pdf->setPrintHeader(false); // Remove black horizontal line at the header
+        $pdf->setPrintFooter(false); // (Optional) Remove footer if not needed
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('Clinic Admin');
         $pdf->SetTitle('Student Medical Records');
-        $pdf->SetMargins(15, 20, 15); // Increase top margin
+        $pdf->SetMargins(15, 10, 15); // Increase top margin
         $pdf->AddPage();
         $pdf->SetFont('helvetica', '', 12);
-
+        
         // Function to return 'N/A' if the value is empty
         function checkEmpty($value)
         {
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_id'])) {
         // Check if the image file exists
         if (file_exists($image_path)) {
             // Set the X and Y coordinates to position the image
-            $img_x = 91;  // Adjust X position (horizontal)
+            $img_x = 93;  // Adjust X position (horizontal)
             $img_y = $pdf->GetY(); // Adjust Y position (vertical, placing it below the title)
             $img_width = 20; // Set image width (adjust size as needed)
             $img_height = 20; // Set image height (adjust size as needed)
@@ -166,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_id'])) {
 
         // Add medical records
         if (!empty($records)) {
-            $html .= '<h2>Medical Records</h2>
+            $html .= '<h2>School Medical Records</h2>
                       <table class="records-table">
                         <thead>
                             <tr><th>Record Date</th><th>Chief Complaint</th><th>Treatment</th></tr>
