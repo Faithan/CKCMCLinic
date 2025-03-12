@@ -190,7 +190,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         <div class="input-container">
                             <label for="">Password:</label>
                             <input type="text" name="password" id="password" required>
-                            <button type="button" id="generate-password" onclick="generateRandomPassword()">Generate Password</button>
+                            <button class="btn" type="button" id="generate-password" onclick="generateRandomPassword()">Generate Password</button>
                         </div>
 
                         <script>
@@ -482,6 +482,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+   
     }
 
 
@@ -491,6 +492,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         flex-direction: column;
         gap: 5px;
         margin-top: 5px;
+        flex-grow: 1;
     }
 
     .input-container label {

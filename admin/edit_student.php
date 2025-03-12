@@ -307,6 +307,12 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
         padding: 20px;
     }
 
+
+    .edit-student-form h2,
+    .image-container h2{
+        color: var(--text-color);
+    }
+
     .input-container {
         display: flex;
         flex-wrap: wrap;
@@ -321,7 +327,12 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
         flex-direction: column;
         flex-wrap: wrap;
         gap: 5px;
+        flex-grow: 1;
 
+    }
+
+    .input-fields label{
+        color: var(--text-color);
     }
 
 
@@ -329,9 +340,10 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
     .input-fields input, 
     .input-fields select {
         width: 100%;
+        flex-grow: 1;
         padding: 8px;
-        color: var(--text-color);
-        background-color: var(--background-color);
+        color: var(--text-color2);
+        background-color: var(--background-color2);
         border: 0;
         border-bottom: 1px solid var(--border-color)
     }
@@ -368,7 +380,7 @@ $profile_picture = $student['profile_picture'] ?: 'default_profile.png'; // Defa
     .button-container button {
         font-size: 1rem;
         padding: 5px 10px;
-        color: var(--color4);
+        color: white;
         text-decoration: none;
         border-radius: 5px;
         font-weight: bold;

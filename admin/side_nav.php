@@ -235,14 +235,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
     /* Sidebar Styling */
     .sidebar {
         width: 280px;
-
         background-color: #1E293B;
         top: 0;
         left: 0;
         padding: 10px;
         display: flex;
         flex-direction: column;
-        border-right: 1px solid var(--border-color);
+        border-right: 1px solid var(--backgroud-color2);
         transition: ease-in-out 0.3s;
     }
 
