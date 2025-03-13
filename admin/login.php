@@ -229,7 +229,7 @@ session_start();
     }
 
     .login-container {
-        background-color: var(--color4);
+        background-color: #ffffff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
@@ -252,12 +252,11 @@ session_start();
     .login-container h1 {
         font-size: 2rem;
         margin-bottom: 5px;
-        color: var(--button-bg);
-    }
+        color:  #0F172A;
+    }   
     .login-container h2 {
         font-size: 1.5rem;
-   
-        color: var(--text-color);
+        color: #606060;
     }
 
     .login-container p {
@@ -271,6 +270,8 @@ session_start();
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        background-color: #DEE2E6;
+        color:#0F172A ;
     }
 
     .login-container input[type="text"]:focus,

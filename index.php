@@ -183,7 +183,7 @@ session_start();
     }
 
     .login-container {
-        background-color: var(--color4);
+        background-color: #ffffff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
@@ -213,12 +213,15 @@ session_start();
         font-size: 14px;
         margin-bottom: 20px;
         color: var(--text-color2);
+
     }
     .login-container input[type="number"],
     .login-container input[type="password"] {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        background-color: #DEE2E6;
+        color:#0F172A ;
     }
 
     .login-container input[type="number"]:focus,

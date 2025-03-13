@@ -1,0 +1,24 @@
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+Status: 402
+Response: {"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}
+Error: 
+{"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}{"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}{"error":"You have exceeded your monthly included credits for Inference Providers. Subscribe to PRO to get 20x more monthly included credits."}Status: 404
+Response: {"error":"model 'mistral' not found"}
+Error: 
