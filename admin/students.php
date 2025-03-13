@@ -121,6 +121,9 @@ $result = $conn->query($sql);
 
 
 
+
+
+
 <script>
     function filterStudents() {
         const search = document.getElementById('search').value;
@@ -144,6 +147,15 @@ $result = $conn->query($sql);
 
 
 
+
+
+
+
+
+
+
+
+
 <!-- Update Modal -->
 <div id="update-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -157,17 +169,21 @@ $result = $conn->query($sql);
             <input type="text" id="student_department" name="student_department" readonly>
 
             <label for="chief_complaint">Chief Complaint:</label>
-            <textarea id="chief_complaint" name="chief_complaint" required oninput="debouncedSuggestion()"></textarea>
+            <textarea id="chief_complaint" name="chief_complaint" required oninput="debouncedSuggestion(); suggestClosestComplaint();"></textarea>
 
-            <label for="treatment">Treatment (Ai Assisted Suggestion):</label>
+            <small id="ai-suggestion" style="display: block; font-size: 12px; color: gray; margin-bottom:10px;"></small>
+            <!-- Closest Complaint Suggestion -->
+            <small id="complaint-suggestion" style="display: block; font-size: 12px; color: #EB5704; margin-bottom:5px;"></small>
+
+            <label for="treatment">Treatment (AI Assisted Suggestion):</label>
             <textarea id="treatment" name="treatment" required></textarea>
 
-            <!-- Loading indicator -->
+            <!-- Loading Indicator -->
             <div id="loading-indicator" style="display: none; font-size: 12px; color: blue;">
                 🔄 Fetching AI suggestion...
             </div>
 
-            <small id="ai-suggestion" style="display: block; font-size: 12px; color: gray; margin-bottom:10px;"></small>
+         
 
             <button type="submit"><i class="fa-solid fa-file-arrow-up"></i> Save Record</button>
         </form>
@@ -184,19 +200,20 @@ $result = $conn->query($sql);
     }
 
     function getTreatmentSuggestion() {
-        const chiefComplaint = document.getElementById('chief_complaint').value.trim();
+        const chiefComplaintField = document.getElementById('chief_complaint');
+        const chiefComplaint = chiefComplaintField.value.trim();
         const treatmentField = document.getElementById('treatment');
         const suggestionBox = document.getElementById('ai-suggestion');
         const loadingIndicator = document.getElementById('loading-indicator');
 
-        if (chiefComplaint.length < 5) {
-            suggestionBox.innerText = ""; // Clear AI suggestion if input is too short
+        if (chiefComplaint.length < 3) {
+            suggestionBox.innerHTML = ""; // Clear AI suggestions
             treatmentField.value = ""; // Clear treatment field
             loadingIndicator.style.display = "none"; // Hide loader
             return;
         }
 
-        suggestionBox.innerText = ""; // Clear previous AI suggestion
+        suggestionBox.innerHTML = ""; // Clear previous AI suggestions
         treatmentField.value = ""; // Clear previous treatment
         loadingIndicator.style.display = "block"; // Show loading indicator
 
@@ -211,10 +228,28 @@ $result = $conn->query($sql);
             })
             .then(response => response.json())
             .then(data => {
-                const suggestion = data.suggestion || "No AI suggestion available.";
-                treatmentField.value = suggestion; // Update treatment field directly
-                suggestionBox.innerText = "AI Suggested: " + suggestion;
                 loadingIndicator.style.display = "none"; // Hide loading indicator
+
+                if (data.suggestions && data.suggestions.length > 0) {
+                    suggestionBox.innerHTML = "Did you mean: ";
+                    data.suggestions.forEach(suggestion => {
+                        let suggestionElement = document.createElement("span");
+                        suggestionElement.innerText = suggestion;
+                        suggestionElement.style.cursor = "pointer";
+                        suggestionElement.style.color = "blue";
+                        suggestionElement.style.marginRight = "10px";
+                        suggestionElement.style.textDecoration = "underline";
+                        suggestionElement.onclick = function() {
+                            chiefComplaintField.value = suggestion; // Set clicked suggestion as chief complaint
+                            getTreatmentSuggestion(); // Fetch treatment for selected suggestion
+                        };
+                        suggestionBox.appendChild(suggestionElement);
+                    });
+                } else {
+                    suggestionBox.innerText = "No similar complaints found.";
+                }
+
+                treatmentField.value = data.treatment || "No AI suggestion available.";
             })
             .catch(error => {
                 console.error('AI Error:', error);
@@ -222,6 +257,7 @@ $result = $conn->query($sql);
                 loadingIndicator.style.display = "none"; // Hide loading indicator
             });
     }
+
 
     // Existing functions remain unchanged
     function showUpdateModal(studentId, fullName, department) {
