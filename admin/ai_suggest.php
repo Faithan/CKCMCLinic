@@ -1,16 +1,15 @@
 <?php
 header('Content-Type: application/json');
 
-// Read and decode input JSON
 $data = json_decode(file_get_contents("php://input"), true);
 $chief_complaint = strtolower(trim($data['complaint'] ?? ''));
 
 if (!$chief_complaint) {
-    echo json_encode(["suggestion" => "Please provide a complaint."]);
+    echo json_encode(["suggestions" => [], "treatment" => "Please provide a complaint."]);
     exit;
 }
 
-// Expanded AI suggestions with more symptoms and treatments
+// AI suggestions database
 $suggestions = [
     "headache" => "Try drinking water, resting, or taking a mild pain reliever like ibuprofen or acetaminophen.",
     "migraine" => "Stay in a dark, quiet room, use a cold compress, and take prescribed migraine medication.",
@@ -40,15 +39,29 @@ $suggestions = [
     "fatigue" => "Ensure proper sleep, manage stress, stay hydrated, and maintain a balanced diet."
 ];
 
-// Find the closest matching complaint
-$suggestion = "No specific treatment found. Please consult a healthcare provider.";
+// Find the closest matches
+$foundSuggestions = [];
+$treatment = "No specific treatment found. Please consult a healthcare provider.";
+
 foreach ($suggestions as $key => $value) {
-    if (strpos($chief_complaint, $key) !== false) {
-        $suggestion = $value;
-        break;
+    if (strpos($key, $chief_complaint) !== false || strpos($chief_complaint, $key) !== false) {
+        $foundSuggestions[] = ucfirst($key); // Collect matching complaints
+        $treatment = $value; // Assign the corresponding treatment
     }
 }
 
-// Return the suggestion
-echo json_encode(["suggestion" => $suggestion]);
+// If no exact match, try to find the closest ones
+if (empty($foundSuggestions)) {
+    foreach ($suggestions as $key => $value) {
+        if (similar_text($key, $chief_complaint) > 3) { // Adjust the threshold if needed
+            $foundSuggestions[] = ucfirst($key);
+        }
+    }
+}
+
+// Return the response
+echo json_encode([
+    "suggestions" => $foundSuggestions,
+    "treatment" => $treatment
+]);
 ?>
