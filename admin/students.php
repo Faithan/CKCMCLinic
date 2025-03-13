@@ -121,21 +121,6 @@ $result = $conn->query($sql);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
     function filterStudents() {
         const search = document.getElementById('search').value;
@@ -159,11 +144,6 @@ $result = $conn->query($sql);
 
 
 
-
-
-
-
-
 <!-- Update Modal -->
 <div id="update-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -175,10 +155,20 @@ $result = $conn->query($sql);
             <input type="text" id="student_name" name="student_name" readonly>
             <label for="student_department">Department:</label>
             <input type="text" id="student_department" name="student_department" readonly>
+
             <label for="chief_complaint">Chief Complaint:</label>
-            <textarea id="chief_complaint" name="chief_complaint" required></textarea>
-            <label for="treatment">Treatment:</label>
+            <textarea id="chief_complaint" name="chief_complaint" required oninput="debouncedSuggestion()"></textarea>
+
+            <label for="treatment">Treatment (Ai Assisted Suggestion):</label>
             <textarea id="treatment" name="treatment" required></textarea>
+
+            <!-- Loading indicator -->
+            <div id="loading-indicator" style="display: none; font-size: 12px; color: blue;">
+                🔄 Fetching AI suggestion...
+            </div>
+
+            <small id="ai-suggestion" style="display: block; font-size: 12px; color: gray; margin-bottom:10px;"></small>
+
             <button type="submit"><i class="fa-solid fa-file-arrow-up"></i> Save Record</button>
         </form>
     </div>
@@ -186,6 +176,54 @@ $result = $conn->query($sql);
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    let debounceTimer;
+
+    function debouncedSuggestion() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(getTreatmentSuggestion, 1000); // Delay API call by 1 second
+    }
+
+    function getTreatmentSuggestion() {
+        const chiefComplaint = document.getElementById('chief_complaint').value.trim();
+        const treatmentField = document.getElementById('treatment');
+        const suggestionBox = document.getElementById('ai-suggestion');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        if (chiefComplaint.length < 5) {
+            suggestionBox.innerText = ""; // Clear AI suggestion if input is too short
+            treatmentField.value = ""; // Clear treatment field
+            loadingIndicator.style.display = "none"; // Hide loader
+            return;
+        }
+
+        suggestionBox.innerText = ""; // Clear previous AI suggestion
+        treatmentField.value = ""; // Clear previous treatment
+        loadingIndicator.style.display = "block"; // Show loading indicator
+
+        fetch('ai_suggest.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    complaint: chiefComplaint
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const suggestion = data.suggestion || "No AI suggestion available.";
+                treatmentField.value = suggestion; // Update treatment field directly
+                suggestionBox.innerText = "AI Suggested: " + suggestion;
+                loadingIndicator.style.display = "none"; // Hide loading indicator
+            })
+            .catch(error => {
+                console.error('AI Error:', error);
+                suggestionBox.innerText = "AI service unavailable.";
+                loadingIndicator.style.display = "none"; // Hide loading indicator
+            });
+    }
+
+    // Existing functions remain unchanged
     function showUpdateModal(studentId, fullName, department) {
         document.getElementById('student_id').value = studentId;
         document.getElementById('student_name').value = fullName;
@@ -207,10 +245,9 @@ $result = $conn->query($sql);
             })
             .then(response => {
                 if (response.redirected) {
-                    // Redirected indicates success
-                    window.location.href = response.url;
+                    window.location.href = response.url; // Redirect on success
                 } else {
-                    return response.text(); // Read the error message
+                    return response.text(); // Read error message
                 }
             })
             .then(data => {
@@ -232,6 +269,19 @@ $result = $conn->query($sql);
             });
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <style>
@@ -307,8 +357,8 @@ $result = $conn->query($sql);
         border: 0;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 10px;
-        
-    } 
+
+    }
 
     .modal-content input:focus,
     .modal-content textarea:focus {
@@ -321,7 +371,7 @@ $result = $conn->query($sql);
 
     .modal-content textarea {
         resize: vertical;
-        min-height: 100px;
+        min-height: 50px;
     }
 
     /* Submit Button */
@@ -352,9 +402,7 @@ $result = $conn->query($sql);
     }
 
     /* Mobile Responsiveness */
-    @media (max-width: 600px) {
-      
-    }
+    @media (max-width: 600px) {}
 </style>
 
 
@@ -369,7 +417,7 @@ $result = $conn->query($sql);
         justify-content: space-between;
         background-color: var(--color4);
         padding: 10px;
-      
+
         border-bottom: 0;
         border-top: 0;
 
@@ -386,7 +434,7 @@ $result = $conn->query($sql);
         display: flex;
         justify-content: space-between;
         align-items: center;
-     
+
         border-top: 0;
 
     }
@@ -428,7 +476,7 @@ $result = $conn->query($sql);
         justify-content: center;
         overflow-y: scroll;
         padding: 10px;
-     
+
     }
 
     /* Individual Student Card */
@@ -504,7 +552,7 @@ $result = $conn->query($sql);
         color: white;
         border-radius: 5px;
         text-decoration: none;
-      
+
         transition: background-color 0.3s ease, transform 0.2s ease;
         background-color: var(--color3b);
         border: transparent;
@@ -517,7 +565,7 @@ $result = $conn->query($sql);
 
     .action-btn {
         background-color: var(--color1);
- 
+
     }
 
     .action-btn:hover {
