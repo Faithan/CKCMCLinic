@@ -3,46 +3,6 @@
     /* 10px on default */
 
     /* start of light mode */
-    --text-color: #f5f5f5;
-    --text-hover: #a1a1a1cb;
-    --text-hover2: #494949;
-    --text-color2: #b6b6b6;
-
-    --background-color: #0F172A;
-    --background-color2: #070b14;
-    --border-color: #696969;
-
-
-    --color1: #EB5704;
-    /* dominant color */
-    --color1b: #b54200;
-    --color2: #EBB009;
-    --color2b: #c18f05;
-    --color3: #495057;
-    --color3b: #374a68;
-    --color4: #0F172A;
-    --color5: rgb(0, 0, 170);
-    --color6: red;
-    --color6b: rgba(255, 0, 0, 0.741);
-    /* end of light */
-
-    --button-bg: #0F172A;
-    --button-text: #F8FAFC;
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    font-family: "Roboto Flex", serif;
-}
-
-
-
-/* Dark mode styles */
-.dark-mode {
     --text-color: #0F172A;
     --text-hover: #0f172acb;
     --text-hover2: #dfdfdf;
@@ -67,6 +27,49 @@
     --color6b: rgba(255, 0, 0, 0.741);
 
 
+    /* end of light */
+
+    --button-bg: #0F172A;
+    --button-text: #F8FAFC;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Roboto Flex", serif;
+}
+
+
+
+/* Dark mode styles */
+.dark-mode {
+
+    --text-color: #f5f5f5;
+    --text-hover: #a1a1a1cb;
+    --text-hover2: #494949;
+    --text-color2: #b6b6b6;
+
+    --background-color: #0F172A;
+    --background-color2: #070b14;
+    --border-color: #696969;
+
+
+    --color1: #EB5704;
+    /* dominant color */
+    --color1b: #b54200;
+    --color2: #EBB009;
+    --color2b: #c18f05;
+    --color3: #495057;
+    --color3b: #374a68;
+    --color4: #0F172A;
+    --color5: rgb(0, 0, 170);
+    --color6: red;
+    --color6b: rgba(255, 0, 0, 0.741);
+
+  
 }
 
 

@@ -60,7 +60,8 @@ $result = $conn->query($sql);
                     <select id="year_level" onchange="filterStudents()">
                         <option value="">Filter by: Year Level (default)</option>
                         <?php while ($row = $year_levels->fetch_assoc()) { ?>
-                            <option value="<?php echo $row['year_lvl_name']; ?>"><?php echo $row['year_lvl_name']; ?></option>
+                            <option value="<?php echo $row['year_lvl_name']; ?>"><?php echo $row['year_lvl_name']; ?>
+                            </option>
                         <?php } ?>
                     </select>
                     <select id="gender" onchange="filterStudents()">
@@ -104,7 +105,8 @@ $result = $conn->query($sql);
             </div>
 
             <div class="footer-container">
-                <label for="">Total Students: <span id="total-students-label"><?php echo $total_students; ?></span></label>
+                <label for="">Total Students: <span
+                        id="total-students-label"><?php echo $total_students; ?></span></label>
                 <a href="add_student.php"><i class="fa-solid fa-user-plus"></i> Add Student</a>
             </div>
 
@@ -118,9 +120,6 @@ $result = $conn->query($sql);
 </body>
 
 </html>
-
-
-
 
 
 
@@ -152,10 +151,6 @@ $result = $conn->query($sql);
 
 
 
-
-
-
-
 <!-- Update Modal -->
 <div id="update-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -163,17 +158,27 @@ $result = $conn->query($sql);
         <h3>Update Record</h3>
         <form id="update-form" method="POST">
             <input type="hidden" id="student_id" name="student_id">
+
             <label for="student_name">Student Name:</label>
             <input type="text" id="student_name" name="student_name" readonly>
+
             <label for="student_department">Department:</label>
             <input type="text" id="student_department" name="student_department" readonly>
 
             <label for="chief_complaint">Chief Complaint:</label>
-            <textarea id="chief_complaint" name="chief_complaint" required oninput="debouncedSuggestion(); suggestClosestComplaint();"></textarea>
+            <textarea id="chief_complaint" name="chief_complaint" required oninput="debouncedSuggestion();"></textarea>
 
             <small id="ai-suggestion" style="display: block; font-size: 12px; color: gray; margin-bottom:10px;"></small>
-            <!-- Closest Complaint Suggestion -->
-            <small id="complaint-suggestion" style="display: block; font-size: 12px; color: #EB5704; margin-bottom:5px;"></small>
+            <small id="complaint-suggestion"
+                style="display: block; font-size: 12px; color: #EB5704; margin-bottom:5px;"></small>
+
+            <!-- Info, Symptoms, Prevention Sections -->
+            <div id="ai-info-container" style="display:none; margin-bottom: 15px; color: var(--text-color2);">
+                <h4>Details:</h4>
+                <p><strong>Info:</strong> <span id="ai-info"></span></p>
+                <p><strong>Symptoms:</strong> <span id="ai-symptoms"></span></p>
+                <p><strong>Prevention:</strong> <span id="ai-prevention"></span></p>
+            </div>
 
             <label for="treatment">Treatment (AI Assisted Suggestion):</label>
             <textarea id="treatment" name="treatment" required></textarea>
@@ -182,8 +187,6 @@ $result = $conn->query($sql);
             <div id="loading-indicator" style="display: none; font-size: 12px; color: blue;">
                 🔄 Fetching AI suggestion...
             </div>
-
-         
 
             <button type="submit"><i class="fa-solid fa-file-arrow-up"></i> Save Record</button>
         </form>
@@ -206,29 +209,34 @@ $result = $conn->query($sql);
         const suggestionBox = document.getElementById('ai-suggestion');
         const loadingIndicator = document.getElementById('loading-indicator');
 
+        // AI Info Fields
+        const aiInfoContainer = document.getElementById('ai-info-container');
+        const aiInfo = document.getElementById('ai-info');
+        const aiSymptoms = document.getElementById('ai-symptoms');
+        const aiPrevention = document.getElementById('ai-prevention');
+
         if (chiefComplaint.length < 3) {
-            suggestionBox.innerHTML = ""; // Clear AI suggestions
-            treatmentField.value = ""; // Clear treatment field
-            loadingIndicator.style.display = "none"; // Hide loader
+            suggestionBox.innerHTML = "";
+            treatmentField.value = "";
+            loadingIndicator.style.display = "none";
+            aiInfoContainer.style.display = "none";
             return;
         }
 
-        suggestionBox.innerHTML = ""; // Clear previous AI suggestions
-        treatmentField.value = ""; // Clear previous treatment
-        loadingIndicator.style.display = "block"; // Show loading indicator
+        suggestionBox.innerHTML = "";
+        treatmentField.value = "";
+        loadingIndicator.style.display = "block";
 
         fetch('ai_suggest.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    complaint: chiefComplaint
-                })
-            })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ complaint: chiefComplaint })
+        })
             .then(response => response.json())
             .then(data => {
-                loadingIndicator.style.display = "none"; // Hide loading indicator
+                console.log("AI Response:", data);  // 🔍 Debugging: Check API Response
+
+                loadingIndicator.style.display = "none";
 
                 if (data.suggestions && data.suggestions.length > 0) {
                     suggestionBox.innerHTML = "Did you mean: ";
@@ -239,9 +247,9 @@ $result = $conn->query($sql);
                         suggestionElement.style.color = "blue";
                         suggestionElement.style.marginRight = "10px";
                         suggestionElement.style.textDecoration = "underline";
-                        suggestionElement.onclick = function() {
-                            chiefComplaintField.value = suggestion; // Set clicked suggestion as chief complaint
-                            getTreatmentSuggestion(); // Fetch treatment for selected suggestion
+                        suggestionElement.onclick = function () {
+                            chiefComplaintField.value = suggestion;
+                            getTreatmentSuggestion();
                         };
                         suggestionBox.appendChild(suggestionElement);
                     });
@@ -250,16 +258,29 @@ $result = $conn->query($sql);
                 }
 
                 treatmentField.value = data.treatment || "No AI suggestion available.";
+
+                // ✅ Ensure AI Info, Symptoms, and Prevention are displayed
+                if (data.information || data.symptoms || data.prevention) {
+                    console.log("Info:", data.information);
+                    console.log("Symptoms:", data.symptoms);
+                    console.log("Prevention:", data.prevention);
+
+                    aiInfo.innerText = data.information || "No information available.";
+                    aiSymptoms.innerText = data.symptoms || "No symptoms listed.";
+                    aiPrevention.innerText = data.prevention || "No prevention steps available.";
+                    aiInfoContainer.style.display = "block";  // ✅ Ensure section is visible
+                } else {
+                    aiInfoContainer.style.display = "none";   // ✅ Hide if no data is available
+                }
             })
             .catch(error => {
                 console.error('AI Error:', error);
                 suggestionBox.innerText = "AI service unavailable.";
-                loadingIndicator.style.display = "none"; // Hide loading indicator
+                loadingIndicator.style.display = "none";
             });
     }
 
 
-    // Existing functions remain unchanged
     function showUpdateModal(studentId, fullName, department) {
         document.getElementById('student_id').value = studentId;
         document.getElementById('student_name').value = fullName;
@@ -271,19 +292,19 @@ $result = $conn->query($sql);
         document.getElementById('update-modal').style.display = 'none';
     }
 
-    document.getElementById('update-form').addEventListener('submit', function(event) {
+    document.getElementById('update-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
         const formData = new FormData(this);
         fetch('insert_record.php', {
-                method: 'POST',
-                body: formData
-            })
+            method: 'POST',
+            body: formData
+        })
             .then(response => {
                 if (response.redirected) {
-                    window.location.href = response.url; // Redirect on success
+                    window.location.href = response.url;
                 } else {
-                    return response.text(); // Read error message
+                    return response.text();
                 }
             })
             .then(data => {
@@ -305,16 +326,6 @@ $result = $conn->query($sql);
             });
     });
 </script>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -348,6 +359,7 @@ $result = $conn->query($sql);
         padding: 20px;
         animation: fadeIn 0.3s ease-out;
         position: relative;
+        overflow: auto;
     }
 
     /* Close Button */
