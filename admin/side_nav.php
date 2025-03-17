@@ -40,12 +40,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <label for="">Operation</label>
                 <a href="students.php" title="Students" class="<?php echo ($current_page == 'students.php') ? 'active' : ''; ?>"><i class="fa-solid fa-user-graduate"></i> <span>Students</span></a>
                 <a href="records.php" title="Records" class="<?php echo ($current_page == 'records.php') ? 'active' : ''; ?>"><i class="fa-solid fa-clipboard"></i> <span>Records</span></a>
+                <a href="course_settings.php" title="Courses" class="<?php echo ($current_page == 'course_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-building"></i> <span>Courses</span></a>
             </div>
 
             <div class="mini-menu">
                 <label for="">Settings</label>
+
                 <a href="admin_settings.php" title="Admin" class="<?php echo ($current_page == 'admin_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gears"></i> <span>Admin</span></a>
-                <a href="course_settings.php" title="Courses" class="<?php echo ($current_page == 'course_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-building"></i> <span>Courses</span></a>
+          
             </div>
         </div>
 

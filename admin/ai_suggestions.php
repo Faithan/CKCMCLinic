@@ -1,48 +1,56 @@
 <?php
 $ai_suggest = [
     "headache" => [
+        "medicine" => "Paracetamol, Ibuprofen",
         "info" => "A common condition due to stress, dehydration, or migraines.",
         "symptoms" => "Pain in head/neck, sensitivity to light, nausea.",
         "treatment" => "Drink water, rest in a dark room, use pain relievers.",
         "prevention" => "Stay hydrated, reduce stress, and get enough sleep."
     ],
     "migraine" => [
+        "medicine" => "Sumatriptan, Naproxen",
         "info" => "Severe headache often with nausea and sensitivity to light/sound.",
         "symptoms" => "Throbbing pain, aura, nausea, light/sound sensitivity.",
         "treatment" => "Rest, apply a cold compress, and take prescribed medication.",
         "prevention" => "Avoid triggers like certain foods, stress, and lack of sleep."
     ],
     "fever" => [
+        "medicine" => "Paracetamol, Ibuprofen",
         "info" => "A body's immune response to infections (viral/bacterial).",
         "symptoms" => "High temperature, chills, sweating, fatigue.",
         "treatment" => "Stay hydrated, rest, take fever reducers (paracetamol).",
         "prevention" => "Maintain hygiene, get vaccinated, and avoid sick people."
     ],
     "cough" => [
+        "medicine" => "Dextromethorphan, Guaifenesin",
         "info" => "A reflex to clear airways of mucus, dust, or infections.",
         "symptoms" => "Dry/wet cough, sore throat, congestion.",
         "treatment" => "Warm fluids, honey with tea, use a humidifier.",
         "prevention" => "Avoid allergens, quit smoking, stay away from pollutants."
     ],
     "flu" => [
+        "medicine" => "Oseltamivir (Tamiflu), Ibuprofen",
         "info" => "Contagious respiratory illness caused by influenza viruses.",
         "symptoms" => "High fever, chills, body aches, fatigue, cough.",
         "treatment" => "Rest, fluids, OTC flu meds, warm baths.",
         "prevention" => "Annual flu shot, handwashing, avoiding close contact."
     ],
     "stomach ache" => [
+        "medicine" => "Antacids, Buscopan",
         "info" => "Pain in the abdomen due to gas, indigestion, or infection.",
         "symptoms" => "Bloating, nausea, diarrhea, constipation.",
         "treatment" => "Ginger tea, avoid spicy foods, light meals.",
         "prevention" => "Balanced diet, avoid overeating, stay hydrated."
     ],
     "chest pain" => [
+        "medicine" => "Aspirin (if heart-related), Antacids (if reflux-related)",
         "info" => "May indicate heart issues, acid reflux, or muscle strain.",
         "symptoms" => "Tightness, burning, dizziness, shortness of breath.",
         "treatment" => "Seek emergency care if severe; otherwise, rest and avoid heavy meals.",
         "prevention" => "Maintain heart health, manage stress, and eat well."
     ],
     "shortness of breath" => [
+        "medicine" => "Albuterol (if asthma-related), Oxygen therapy (if severe)",
         "info" => "Can be caused by asthma, anxiety, or heart conditions.",
         "symptoms" => "Difficulty breathing, wheezing, chest tightness.",
         "treatment" => "Sit upright, use a fan for fresh air, deep breathing exercises.",

@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 $data = json_decode(file_get_contents("php://input"), true);
 $chief_complaint = strtolower(trim($data['complaint'] ?? ''));
 
+
 // Handle empty input
 if (!$chief_complaint) {
     echo json_encode([
@@ -12,7 +13,8 @@ if (!$chief_complaint) {
         "information" => $information,
         "symptoms" => $ai_suggest[$closestMatch]["symptoms"] ?? "No symptoms listed.",
         "prevention" => $ai_suggest[$closestMatch]["prevention"] ?? "No prevention steps available.",
-        "treatment" => $treatments
+        "treatment" => $treatments,
+        "medicine" => $medicine  // ✅ Added this line
     ]);
     exit;
 }
@@ -67,6 +69,7 @@ if (!empty($foundSuggestions)) {
     if (isset($ai_suggest[$firstSuggestion])) {
         $symptoms = $ai_suggest[$firstSuggestion]["symptoms"] ?? "No symptoms listed.";
         $prevention = $ai_suggest[$firstSuggestion]["prevention"] ?? "No prevention steps available.";
+        $medicine = $ai_suggest[$firstSuggestion]["medicine"] ?? "No recommended medicine found.";
     }
 }
 
@@ -75,7 +78,8 @@ echo json_encode([
     "information" => $information,
     "symptoms" => $symptoms,
     "prevention" => $prevention,
-    "treatment" => $treatment
+    "treatment" => $treatment,
+    "medicine" => $medicine  // ✅ Added this line
 ]);
 
 
