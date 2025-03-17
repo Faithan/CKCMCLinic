@@ -172,13 +172,15 @@ $result = $conn->query($sql);
             <small id="complaint-suggestion"
                 style="display: block; font-size: 12px; color: #EB5704; margin-bottom:5px;"></small>
 
-            <!-- Info, Symptoms, Prevention Sections -->
+            <!-- Info, Symptoms, Prevention, Recommended Medicine Sections -->
             <div id="ai-info-container" style="display:none; margin-bottom: 15px; color: var(--text-color2);">
                 <h4>Details:</h4>
                 <p><strong>Info:</strong> <span id="ai-info"></span></p>
                 <p><strong>Symptoms:</strong> <span id="ai-symptoms"></span></p>
                 <p><strong>Prevention:</strong> <span id="ai-prevention"></span></p>
+                <p><strong>Recommended Medicine:</strong> <span id="ai-medicine"></span></p> <!-- Added this line -->
             </div>
+
 
             <label for="treatment">Treatment (AI Assisted Suggestion):</label>
             <textarea id="treatment" name="treatment" required></textarea>
@@ -214,6 +216,7 @@ $result = $conn->query($sql);
         const aiInfo = document.getElementById('ai-info');
         const aiSymptoms = document.getElementById('ai-symptoms');
         const aiPrevention = document.getElementById('ai-prevention');
+        const aiMedicine = document.getElementById('ai-medicine'); // Added for recommended medicine
 
         if (chiefComplaint.length < 3) {
             suggestionBox.innerHTML = "";
@@ -264,10 +267,12 @@ $result = $conn->query($sql);
                     console.log("Info:", data.information);
                     console.log("Symptoms:", data.symptoms);
                     console.log("Prevention:", data.prevention);
+                    console.log("Medicine:", data.medicine); // Debugging for medicine
 
                     aiInfo.innerText = data.information || "No information available.";
                     aiSymptoms.innerText = data.symptoms || "No symptoms listed.";
                     aiPrevention.innerText = data.prevention || "No prevention steps available.";
+                    aiMedicine.innerText = data.medicine || "No recommended medicine."; // Display recommended medicine
                     aiInfoContainer.style.display = "block";  // ✅ Ensure section is visible
                 } else {
                     aiInfoContainer.style.display = "none";   // ✅ Hide if no data is available
