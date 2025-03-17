@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2025 at 01:33 PM
+-- Generation Time: Mar 17, 2025 at 01:14 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,6 +75,32 @@ INSERT INTO `course_tbl` (`course_id`, `course_name`, `course_info`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `medicines_tbl`
+--
+
+CREATE TABLE `medicines_tbl` (
+  `medicine_id` int(11) NOT NULL,
+  `medicine_name` varchar(255) NOT NULL,
+  `medicine_description` text NOT NULL,
+  `medicine_pic` text NOT NULL,
+  `stocks` int(255) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `medicines_tbl`
+--
+
+INSERT INTO `medicines_tbl` (`medicine_id`, `medicine_name`, `medicine_description`, `medicine_pic`, `stocks`, `created_at`) VALUES
+(1, 'Paracetamol', '', '', 2, '2025-03-17 11:47:28'),
+(2, 'Ibuprofen', '', '', 4, '2025-03-17 11:47:52'),
+(3, 'Sumatriptan', '', '', 4, '2025-03-17 11:48:07'),
+(4, 'Naproxen', '', '', 4, '2025-03-17 11:48:26'),
+(5, 'Dextromethorphan', '', '', 0, '2025-03-17 11:48:44');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `record_tbl`
 --
 
@@ -82,20 +108,32 @@ CREATE TABLE `record_tbl` (
   `record_id` int(11) NOT NULL,
   `student_id` bigint(255) NOT NULL,
   `record_date` date NOT NULL,
+  `record_time` time NOT NULL,
   `student_name` text NOT NULL,
   `student_department` text NOT NULL,
   `chief_complaint` text NOT NULL,
-  `treatment` text NOT NULL
+  `treatment` text NOT NULL,
+  `medicine_taken` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `record_tbl`
 --
 
-INSERT INTO `record_tbl` (`record_id`, `student_id`, `record_date`, `student_name`, `student_department`, `chief_complaint`, `treatment`) VALUES
-(11, 228224, '2025-01-21', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'HeadAche', 'Paracetamol'),
-(12, 228375, '2025-01-21', 'KC  V. Marcel ', 'Bachelor of Science in Computer Science', 'dgfdfgd', 'asdasd'),
-(13, 228719, '2025-01-21', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'headache', 'aspirin');
+INSERT INTO `record_tbl` (`record_id`, `student_id`, `record_date`, `record_time`, `student_name`, `student_department`, `chief_complaint`, `treatment`, `medicine_taken`) VALUES
+(11, 228224, '2025-01-21', '00:00:00', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'HeadAche', 'Paracetamol', ''),
+(12, 228375, '2025-01-21', '00:00:00', 'KC  V. Marcel ', 'Bachelor of Science in Computer Science', 'dgfdfgd', 'asdasd', ''),
+(13, 228719, '2025-01-21', '00:00:00', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'headache', 'aspirin', ''),
+(14, 228719, '2025-03-17', '00:00:00', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', ''),
+(15, 228719, '2025-03-17', '00:00:00', 'John Rafael T Flores ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', ''),
+(16, 228224, '2025-03-17', '19:43:03', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Array'),
+(17, 228224, '2025-03-17', '19:46:25', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', '1'),
+(18, 228224, '2025-03-17', '19:48:03', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol, Ibuprofen'),
+(19, 228224, '2025-03-17', '19:51:05', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol, Ibuprofen'),
+(20, 228224, '2025-03-17', '19:52:34', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol, Ibuprofen'),
+(21, 228224, '2025-03-17', '19:53:49', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol'),
+(22, 228224, '2025-03-17', '19:55:59', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol'),
+(23, 228224, '2025-03-17', '20:04:07', 'Dan Cedric Morales Cablayan  ', 'Bachelor of Science in Computer Science', 'Headache', 'Drink water, rest in a dark room, use pain relievers.', 'Paracetamol');
 
 -- --------------------------------------------------------
 
@@ -186,6 +224,12 @@ ALTER TABLE `course_tbl`
   ADD PRIMARY KEY (`course_id`);
 
 --
+-- Indexes for table `medicines_tbl`
+--
+ALTER TABLE `medicines_tbl`
+  ADD PRIMARY KEY (`medicine_id`);
+
+--
 -- Indexes for table `record_tbl`
 --
 ALTER TABLE `record_tbl`
@@ -220,10 +264,16 @@ ALTER TABLE `course_tbl`
   MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `medicines_tbl`
+--
+ALTER TABLE `medicines_tbl`
+  MODIFY `medicine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `record_tbl`
 --
 ALTER TABLE `record_tbl`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `student_tbl`
