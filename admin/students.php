@@ -190,10 +190,84 @@ $result = $conn->query($sql);
                 🔄 Fetching AI suggestion...
             </div>
 
+            <label>Medicines Taken (available only):</label>
+            <input type="text" id="medicineSearch" placeholder="Search for medicine..." onkeyup="filterMedicines()">
+            <div id="medicineList">
+                <?php
+                $sql = "SELECT medicine_id, medicine_name FROM medicines_tbl WHERE stocks > 0";
+                $result = $conn->query($sql);
+                $medicineCount = 0; // Counter to track displayed medicines
+                
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $hiddenClass = ($medicineCount >= 3) ? 'hidden-medicine' : ''; // Hide if more than 3
+                        echo '<div class="medicine-item ' . $hiddenClass . '">';
+                        echo '<span class="medicine-name">' . $row['medicine_name'] . '</span>';
+                        echo '<input type="checkbox" name="medicine_taken[]" value="' . $row['medicine_name'] . '"> ';
+                        echo '</div>';
+                        $medicineCount++;
+                    }
+                } else {
+                    echo '<p style="color: red;">No available medicines.</p>';
+                }
+                ?>
+            </div>
+
+            <script>
+                function filterMedicines() {
+                    let input = document.getElementById("medicineSearch").value.toLowerCase();
+                    let medicines = document.querySelectorAll(".medicine-item");
+
+                    medicines.forEach(function (medicine) {
+                        let name = medicine.querySelector(".medicine-name").textContent.toLowerCase();
+                        if (name.includes(input) || input === "") {
+                            medicine.style.display = "flex";
+                        } else {
+                            medicine.style.display = "none";
+                        }
+                    });
+                }
+            </script>
+
+            <style>
+                #medicineSearch {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 10px;
+                }
+
+                .medicine-item {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                    margin-bottom: 5px;
+                }
+
+                .medicine-item span{
+                    color: var(--text-color);
+                    width: 100%;
+                }
+
+                .medicine-item input{
+                    width: 10%;
+                }
+
+                .hidden-medicine {
+                    display: none;
+                    /* Hide medicines beyond the first 3 */
+                }
+            </style>
+
+
+
+
+
             <button type="submit"><i class="fa-solid fa-file-arrow-up"></i> Save Record</button>
         </form>
     </div>
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -291,6 +365,7 @@ $result = $conn->query($sql);
         document.getElementById('student_name').value = fullName;
         document.getElementById('student_department').value = department;
         document.getElementById('update-modal').style.display = 'block';
+
     }
 
     function closeModal() {
@@ -331,6 +406,19 @@ $result = $conn->query($sql);
             });
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
