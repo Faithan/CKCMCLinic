@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2025 at 01:14 PM
+-- Generation Time: Apr 15, 2025 at 06:31 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -92,11 +92,7 @@ CREATE TABLE `medicines_tbl` (
 --
 
 INSERT INTO `medicines_tbl` (`medicine_id`, `medicine_name`, `medicine_description`, `medicine_pic`, `stocks`, `created_at`) VALUES
-(1, 'Paracetamol', '', '', 2, '2025-03-17 11:47:28'),
-(2, 'Ibuprofen', '', '', 4, '2025-03-17 11:47:52'),
-(3, 'Sumatriptan', '', '', 4, '2025-03-17 11:48:07'),
-(4, 'Naproxen', '', '', 4, '2025-03-17 11:48:26'),
-(5, 'Dextromethorphan', '', '', 0, '2025-03-17 11:48:44');
+(8, 'Paracetamol', 'Paracetamol is a medicine used for mild to moderate pain. It can be bought over the counter in pharmacies, supermarkets and other shops. You can also take paracetamol for: fever (high temperature) stronger pain — used with other pain relievers such as codeine.', '67195.jpg', 5, '2025-04-15 10:28:35');
 
 -- --------------------------------------------------------
 
@@ -267,7 +263,7 @@ ALTER TABLE `course_tbl`
 -- AUTO_INCREMENT for table `medicines_tbl`
 --
 ALTER TABLE `medicines_tbl`
-  MODIFY `medicine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `medicine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `record_tbl`
