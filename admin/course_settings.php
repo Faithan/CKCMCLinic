@@ -68,20 +68,20 @@ if (isset($_GET['delete'])) {
             <form method="POST" action="">
                 <h2 style="margin-bottom: 10px;">Manage Courses</h2>
                 <label for="course_name">Course Name:</label>
-                <input type="text" id="course_name" name="course_name" required>
+                <input type="text" id="course_name" name="course_name" placeholder="Ex: Bachelor of Science in Computer Science" required>
                 <br>
                 <label for="course_info">Course Info:</label>
-                <textarea id="course_info" name="course_info" required></textarea>
+                <textarea id="course_info" name="course_info" placeholder="It's a four-year undergraduate degree program that focuses on the principles and practices of computer science, including areas like software development, computer architecture, and algorithms. The program equips students with the skills to design, develop, and implement computer systems and software solutions. " required></textarea>
                 <br>
                 <button type="submit" name="add_course"><i class="fa-solid fa-plus"></i> Add Course</button>
             </form>
 
             <!-- Course List -->
-            <h2 style="margin-top:20px;text-align:left; color:var(--color1)">Existing Courses</h2>
+            <!-- <h2 style="margin-top:20px;text-align:left; color:var(--color1)">Existing Courses</h2> -->
             <table >
                 <thead>
                     <tr>
-                        <th>Course ID</th>
+                        <!-- <th>Course ID</th> -->
                         <th>Course Name</th>
                         <th>Course Info</th> 
                         <th>Actions</th>
@@ -92,10 +92,10 @@ if (isset($_GET['delete'])) {
                     $result = $conn->query("SELECT `course_id`, `course_name`, `course_info` FROM `course_tbl` WHERE 1");
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>{$row['course_id']}</td>";
+                        // echo "<td>{$row['course_id']}</td>";
                         echo "<td>{$row['course_name']}</td>";
                         echo "<td>{$row['course_info']}</td>";
-                        echo "<td>
+                        echo "<td style='text-align:center;'>
                                 <button class='delete-btn' data-id='{$row['course_id']}'><i class='fa-solid fa-trash-can'></i> Delete</button>
                               </td>";
                         echo "</tr>";
@@ -171,7 +171,7 @@ if (isset($_GET['delete'])) {
         padding: 20px;
         display: flex;
         flex-direction: column;
-        border: 1px solid var(--border-color);
+
     }
 
     form h2{
@@ -191,13 +191,16 @@ if (isset($_GET['delete'])) {
      
     }
 
+    form textarea {
+        height: 100px;
+    }
  
 
     form button{
         padding: 5px;
         background-color: var(--color3b);
         color: white;
-        border-radius: 5px;
+        border: 1px solid var(--color3b);
        
     }
 

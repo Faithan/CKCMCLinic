@@ -41,6 +41,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <a href="students.php" title="Students" class="<?php echo ($current_page == 'students.php') ? 'active' : ''; ?>"><i class="fa-solid fa-user-graduate"></i> <span>Students</span></a>
                 <a href="records.php" title="Records" class="<?php echo ($current_page == 'records.php') ? 'active' : ''; ?>"><i class="fa-solid fa-clipboard"></i> <span>Records</span></a>
                 <a href="course_settings.php" title="Courses" class="<?php echo ($current_page == 'course_settings.php') ? 'active' : ''; ?>"><i class="fa-solid fa-building"></i> <span>Courses</span></a>
+                <a href="medicines.php" title="Medicines" class="<?php echo ($current_page == 'medicines.php') ? 'active' : ''; ?>"><i class="fa-solid fa-pills"></i> <span>Medicines</span></a>
             </div>
 
             <div class="mini-menu">

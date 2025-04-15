@@ -98,6 +98,7 @@ button,
 a {
     cursor: pointer;
     color: var(--text-color);
+
 }
 
 .gradient-text {
@@ -208,13 +209,18 @@ table tbody tr:nth-child(odd) {
 th,
 td {
     border: 1px solid var(--border-color);
-    padding: 12px 15px;
+    padding: 10px;
     /* Add more padding for better spacing */
     text-align: left;
     font-size: 0.95rem;
     /* Adjust font size for readability */
     vertical-align: middle;
     /* Align content vertically */
+}
+
+td{
+    border-left: 0;
+    border-right: 0;
 }
 
 table th {
